@@ -2,6 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://c2npswig4vo2a" path="res://sceans/platforms.tscn" id="1_0o0wm"]
 [ext_resource type="PackedScene" uid="uid://cj8mhq26eoiuu" path="res://sceans/player.tscn" id="1_if5bh"]
+[ext_resource type="PackedScene" uid="uid://b867s6fm1mae3" path="res://sceans/killzone.tscn" id="3_sytet"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_l67ju"]
+distance = -39.0
 
 [node name="main" type="Node2D" unique_id=205073746]
 
@@ -17,3 +21,8 @@ position = Vector2(-2, 0)
 
 [node name="player" parent="." unique_id=284845306 instance=ExtResource("1_if5bh")]
 position = Vector2(-12, 1)
+
+[node name="killzone" parent="." unique_id=1677886087 instance=ExtResource("3_sytet")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="killzone" unique_id=283276266]
+shape = SubResource("WorldBoundaryShape2D_l67ju")
