@@ -19,6 +19,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 3.0
+offset_right = 6.0
+offset_bottom = 3.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("CompressedTexture2D_ote24")
@@ -54,6 +58,57 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Quit"
 
+[node name="SettingsPanel" type="Panel" parent="." unique_id=1087183707]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -571.0
+offset_top = -320.0
+offset_right = 578.0
+offset_bottom = 320.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsPanel" unique_id=1528208863]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.99500006
+anchor_bottom = 1.0
+offset_top = -3.0
+offset_right = -0.25512695
+offset_bottom = -3.0
+
+[node name="MusicLabel" type="Label" parent="SettingsPanel/VBoxContainer" unique_id=726856139]
+layout_mode = 2
+text = "Music"
+
+[node name="MusicSlider" type="HSlider" parent="SettingsPanel/VBoxContainer" unique_id=1240781577]
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="BackButton" type="Button" parent="SettingsPanel/VBoxContainer" unique_id=1396989333]
+layout_mode = 2
+text = "Back"
+
+[node name="SfxLabel" type="Label" parent="SettingsPanel/VBoxContainer" unique_id=1316316282]
+layout_mode = 2
+text = "Sound"
+
+[node name="SfxSlider" type="HSlider" parent="SettingsPanel/VBoxContainer" unique_id=450809532]
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+value = 1.0
+
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="VBoxContainer/Button3" to="." method="_on_button_3_pressed"]
+[connection signal="value_changed" from="SettingsPanel/VBoxContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="pressed" from="SettingsPanel/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="value_changed" from="SettingsPanel/VBoxContainer/SfxSlider" to="." method="_on_sfx_slider_value_changed"]
