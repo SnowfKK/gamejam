@@ -2,7 +2,33 @@
 
 [ext_resource type="PackedScene" uid="uid://c2npswig4vo2a" path="res://sceans/platforms.tscn" id="1_0o0wm"]
 [ext_resource type="PackedScene" uid="uid://cj8mhq26eoiuu" path="res://sceans/player.tscn" id="1_if5bh"]
+[ext_resource type="Texture2D" uid="uid://cjmf4q166lq2y" path="res://assets/concrete.png" id="1_v578v"]
+[ext_resource type="Texture2D" uid="uid://bms047fclkxyv" path="res://assets/tileswood.png" id="2_q12lg"]
 [ext_resource type="PackedScene" uid="uid://b867s6fm1mae3" path="res://sceans/killzone.tscn" id="3_sytet"]
+[ext_resource type="Texture2D" uid="uid://c242xjtjs6w55" path="res://assets/woodplatform.png" id="3_yt73i"]
+[ext_resource type="Texture2D" uid="uid://crwwqsbrxnttj" path="res://assets/tilesconcrete.png" id="4_2dimy"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p1alf"]
+texture = ExtResource("1_v578v")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tutu3"]
+texture = ExtResource("2_q12lg")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5vvnq"]
+texture = ExtResource("3_yt73i")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_x0kff"]
+texture = ExtResource("4_2dimy")
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_sytet"]
+sources/0 = SubResource("TileSetAtlasSource_p1alf")
+sources/1 = SubResource("TileSetAtlasSource_tutu3")
+sources/2 = SubResource("TileSetAtlasSource_5vvnq")
+sources/3 = SubResource("TileSetAtlasSource_x0kff")
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_l67ju"]
 distance = -39.0
@@ -10,11 +36,16 @@ distance = -39.0
 [node name="main" type="Node2D" unique_id=205073746]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2091636934]
-zoom = Vector2(4, 4)
-limit_bottom = 100
+limit_left = -10000001
+limit_top = -9999999
+limit_right = 9999999
+limit_bottom = 101
+rotation_smoothing_enabled = true
 
 [node name="TileMap" type="TileMap" parent="." unique_id=2002170553]
+tile_set = SubResource("TileSet_sytet")
 format = 2
+layer_0/tile_data = PackedInt32Array(65533, 1, 0, 65534, 1, 0, 65535, 1, 0, 0, 1, 0, 1, 1, 0, 2, 1, 0, 3, 1, 0, 4, 1, 0, 5, 1, 0, 6, 1, 0, 7, 1, 0, 8, 1, 0, 9, 1, 0, 10, 1, 0, 11, 1, 0, 12, 1, 0, 13, 1, 0, 14, 1, 0, 15, 1, 0, 16, 1, 0, 17, 1, 0, 18, 1, 0)
 
 [node name="platforms" parent="." unique_id=483372837 instance=ExtResource("1_0o0wm")]
 position = Vector2(-2, 0)
