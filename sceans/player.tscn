@@ -78,13 +78,14 @@ animations = [{
 size = Vector2(5, 21)
 
 [node name="player" type="CharacterBody2D" unique_id=284845306]
+z_index = 5
 script = ExtResource("1_bx0fl")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2010970740]
 position = Vector2(10.320922, -14)
 scale = Vector2(0.91744226, 0.87499994)
 sprite_frames = SubResource("SpriteFrames_l67ju")
-frame_progress = 0.5091439
+frame_progress = 0.606376
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1637073879]
 position = Vector2(11.5, -11.5)
