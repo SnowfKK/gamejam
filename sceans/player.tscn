@@ -1,7 +1,83 @@
 [gd_scene format=3 uid="uid://cj8mhq26eoiuu"]
 
+[ext_resource type="Texture2D" uid="uid://dt6eip58j7ax8" path="res://assets/Sprite-0004-Sheet.png" id="1_nttm0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bx0fl"]
+atlas = ExtResource("1_nttm0")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4xq3o"]
+atlas = ExtResource("1_nttm0")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j3slv"]
+atlas = ExtResource("1_nttm0")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w2dit"]
+atlas = ExtResource("1_nttm0")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_usi7f"]
+atlas = ExtResource("1_nttm0")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7fswv"]
+atlas = ExtResource("1_nttm0")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31hon"]
+atlas = ExtResource("1_nttm0")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1d1xo"]
+atlas = ExtResource("1_nttm0")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jmvky"]
+atlas = ExtResource("1_nttm0")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l67ju"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bx0fl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4xq3o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j3slv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w2dit")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_usi7f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7fswv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_31hon")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1d1xo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jmvky")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 50.0
+}]
+
 [node name="player" type="CharacterBody2D" unique_id=284845306]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2010970740]
+scale = Vector2(0.15625001, 0.18749999)
+sprite_frames = SubResource("SpriteFrames_l67ju")
+frame_progress = 0.45486182
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1637073879]

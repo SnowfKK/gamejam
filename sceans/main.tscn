@@ -1,3 +1,14 @@
 [gd_scene format=3 uid="uid://dfdsac56ff4bb"]
 
+[ext_resource type="PackedScene" uid="uid://cj8mhq26eoiuu" path="res://sceans/player.tscn" id="1_if5bh"]
+
 [node name="main" type="Node2D" unique_id=205073746]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2091636934]
+
+[node name="player" parent="." unique_id=284845306 instance=ExtResource("1_if5bh")]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="player" unique_id=1491637685]
+
+[node name="TileMap" type="TileMap" parent="." unique_id=2002170553]
+format = 2
