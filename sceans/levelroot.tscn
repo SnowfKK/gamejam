@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://cp73a6gmuqhm1"]
+
+[ext_resource type="Texture2D" uid="uid://cjmf4q166lq2y" path="res://assets/concrete.png" id="1_kspup"]
+[ext_resource type="Texture2D" uid="uid://bms047fclkxyv" path="res://assets/tileswood.png" id="2_nnbss"]
+[ext_resource type="Texture2D" uid="uid://c242xjtjs6w55" path="res://assets/woodplatform.png" id="3_b3rt4"]
+[ext_resource type="Texture2D" uid="uid://crwwqsbrxnttj" path="res://assets/tilesconcrete.png" id="4_i7r62"]
+[ext_resource type="PackedScene" uid="uid://c2npswig4vo2a" path="res://sceans/platforms.tscn" id="5_wq2ka"]
+[ext_resource type="PackedScene" uid="uid://cj8mhq26eoiuu" path="res://sceans/player.tscn" id="6_c0lqd"]
+[ext_resource type="PackedScene" uid="uid://b867s6fm1mae3" path="res://sceans/killzone.tscn" id="7_1j28q"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p1alf"]
+texture = ExtResource("1_kspup")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tutu3"]
+texture = ExtResource("2_nnbss")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5vvnq"]
+texture = ExtResource("3_b3rt4")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_x0kff"]
+texture = ExtResource("4_i7r62")
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_sytet"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_p1alf")
+sources/1 = SubResource("TileSetAtlasSource_tutu3")
+sources/2 = SubResource("TileSetAtlasSource_5vvnq")
+sources/3 = SubResource("TileSetAtlasSource_x0kff")
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_l67ju"]
+distance = -39.0
+
+[node name="levelroot" type="Node2D" unique_id=205073746]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2091636934]
+limit_left = -10000001
+limit_top = -9999999
+limit_right = 9999999
+limit_bottom = 101
+rotation_smoothing_enabled = true
+
+[node name="TileMap" type="TileMap" parent="." unique_id=2002170553]
+tile_set = SubResource("TileSet_sytet")
+format = 2
+layer_0/tile_data = PackedInt32Array(65534, 1, 0, 65535, 1, 0)
+
+[node name="platforms" parent="." unique_id=483372837 instance=ExtResource("5_wq2ka")]
+position = Vector2(-2, 0)
+
+[node name="player" parent="." unique_id=284845306 instance=ExtResource("6_c0lqd")]
+position = Vector2(-11, 0)
+
+[node name="killzone" parent="." unique_id=1677886087 instance=ExtResource("7_1j28q")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="killzone" unique_id=283276266]
+position = Vector2(0, 18)
+shape = SubResource("WorldBoundaryShape2D_l67ju")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=968022606]
+
+[node name="exit" type="Area2D" parent="." unique_id=1527537428]
+position = Vector2(35, 7)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="exit" unique_id=205445581]
