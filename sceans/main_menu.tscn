@@ -1,5 +1,10 @@
 [gd_scene format=3 uid="uid://dcglq442sr2r5"]
 
+[ext_resource type="Script" uid="uid://m0aigynr6371" path="res://scripts/main_menu.gd" id="1_fax0a"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ote24"]
+load_path = "res://.godot/imported/woodplatform.png-8b099a35107dca151a4a4f1d61d1a10c.ctex"
+
 [node name="main_menu" type="Control" unique_id=986450603]
 layout_mode = 3
 anchors_preset = 15
@@ -7,3 +12,48 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_fax0a")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1707888651]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CompressedTexture2D_ote24")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1827872370]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -219.0
+offset_top = -220.5
+offset_right = 219.0
+offset_bottom = 220.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="VBoxContainer" unique_id=974724845]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Start"
+
+[node name="Button2" type="Button" parent="VBoxContainer" unique_id=781807480]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Settings"
+
+[node name="Button3" type="Button" parent="VBoxContainer" unique_id=105425404]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Quit"
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button3" to="." method="_on_button_3_pressed"]
