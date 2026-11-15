@@ -1,0 +1,385 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://sceans/sky_background.tscn" id="sky"]
+
+[ext_resource type="PackedScene" path="res://sceans/player.tscn" id="player"]
+
+[ext_resource type="PackedScene" path="res://sceans/next_level.tscn" id="exit"]
+
+[ext_resource type="PackedScene" path="res://sceans/bounce_pad.tscn" id="spring"]
+
+[ext_resource type="PackedScene" path="res://sceans/killzone.tscn" id="kill"]
+
+[ext_resource type="Texture2D" path="res://assets/cloud.png" id="cloud"]
+
+[ext_resource type="Script" path="res://scripts/spring_relay.gd" id="control"]
+
+[ext_resource type="PackedScene" path="res://sceans/route_checkpoint.tscn" id="flag"]
+
+[ext_resource type="PackedScene" path="res://sceans/sun_hazard.tscn" id="beam"]
+
+[sub_resource type="RectangleShape2D" id="Base"]
+size = Vector2(207, 16)
+
+[sub_resource type="RectangleShape2D" id="EastStation"]
+size = Vector2(178, 16)
+
+[sub_resource type="RectangleShape2D" id="WestStation"]
+size = Vector2(189, 16)
+
+[sub_resource type="RectangleShape2D" id="LiftStation"]
+size = Vector2(164, 16)
+
+[sub_resource type="RectangleShape2D" id="ControlDeck"]
+size = Vector2(135, 16)
+
+[sub_resource type="RectangleShape2D" id="PhaseWest"]
+size = Vector2(65, 16)
+
+[sub_resource type="RectangleShape2D" id="PhaseEast"]
+size = Vector2(68, 16)
+
+[sub_resource type="RectangleShape2D" id="RecoveryDeck"]
+size = Vector2(145, 16)
+
+[sub_resource type="RectangleShape2D" id="Summit"]
+size = Vector2(183, 16)
+
+[sub_resource type="RectangleShape2D" id="Fall"]
+size = Vector2(4700, 450)
+
+[sub_resource type="RectangleShape2D" id="TransferLift"]
+size = Vector2(68, 16)
+
+
+[node name="Switchback" type="Node2D"]
+script = ExtResource("control")
+
+[node name="SkyBackground" parent="." instance=ExtResource("sky")]
+
+[node name="Base" type="StaticBody2D" parent="."]
+position = Vector2(0, 8)
+
+[node name="Cloud" type="Sprite2D" parent="Base"]
+scale = Vector2(12.9375, 1.4)
+texture = ExtResource("cloud")
+
+[node name="Rail" type="Line2D" parent="Base"]
+points = PackedVector2Array(-103.5, -8, 103.5, -8)
+width = 2.0
+default_color = Color(0.39, 0.97, 0.9, 1)
+
+[node name="Surface" type="CollisionShape2D" parent="Base"]
+shape = SubResource("Base")
+one_way_collision = true
+
+[node name="EastStation" type="StaticBody2D" parent="."]
+position = Vector2(237, -126)
+
+[node name="Cloud" type="Sprite2D" parent="EastStation"]
+scale = Vector2(11.125, 1.4)
+texture = ExtResource("cloud")
+
+[node name="Rail" type="Line2D" parent="EastStation"]
+points = PackedVector2Array(-89, -8, 89, -8)
+width = 2.0
+default_color = Color(0.39, 0.97, 0.9, 1)
+
+[node name="Surface" type="CollisionShape2D" parent="EastStation"]
+shape = SubResource("EastStation")
+one_way_collision = true
+
+[node name="WestStation" type="StaticBody2D" parent="."]
+position = Vector2(8, -266)
+
+[node name="Cloud" type="Sprite2D" parent="WestStation"]
+scale = Vector2(11.8125, 1.4)
+texture = ExtResource("cloud")
+
+[node name="Rail" type="Line2D" parent="WestStation"]
+points = PackedVector2Array(-94.5, -8, 94.5, -8)
+width = 2.0
+default_color = Color(0.39, 0.97, 0.9, 1)
+
+[node name="Surface" type="CollisionShape2D" parent="WestStation"]
+shape = SubResource("WestStation")
+one_way_collision = true
+
+[node name="LiftStation" type="StaticBody2D" parent="."]
+position = Vector2(256, -402)
+
+[node name="Cloud" type="Sprite2D" parent="LiftStation"]
+scale = Vector2(10.25, 1.4)
+texture = ExtResource("cloud")
+
+[node name="Rail" type="Line2D" parent="LiftStation"]
+points = PackedVector2Array(-82, -8, 82, -8)
+width = 2.0
+default_color = Color(0.39, 0.97, 0.9, 1)
+
+[node name="Surface" type="CollisionShape2D" parent="LiftStation"]
+shape = SubResource("LiftStation")
+one_way_collision = true
+
+[node name="ControlDeck" type="StaticBody2D" parent="."]
+position = Vector2(549, -436)
+
+[node name="Cloud" type="Sprite2D" parent="ControlDeck"]
+scale = Vector2(8.4375, 1.4)
+texture = ExtResource("cloud")
+
+[node name="Rail" type="Line2D" parent="ControlDeck"]
+points = PackedVector2Array(-67.5, -8, 67.5, -8)
+width = 2.0
+default_color = Color(0.39, 0.97, 0.9, 1)
+
+[node name="Surface" type="CollisionShape2D" parent="ControlDeck"]
+shape = SubResource("ControlDeck")
+one_way_collision = true
+
+[node name="PhaseWest" type="StaticBody2D" parent="."]
+position = Vector2(690, -444)
+
+[node name="Cloud" type="Sprite2D" parent="PhaseWest"]
+scale = Vector2(4.0625, 1.4)
+texture = ExtResource("cloud")
+modulate = Color(0.48, 0.95, 1, 1)
+
+[node name="Rail" type="Line2D" parent="PhaseWest"]
+points = PackedVector2Array(-32.5, -8, 32.5, -8)
+width = 2.0
+default_color = Color(0.39, 0.97, 0.9, 1)
+
+[node name="Surface" type="CollisionShape2D" parent="PhaseWest"]
+shape = SubResource("PhaseWest")
+one_way_collision = true
+disabled = true
+
+[node name="PhaseEast" type="StaticBody2D" parent="."]
+position = Vector2(811, -478)
+
+[node name="Cloud" type="Sprite2D" parent="PhaseEast"]
+scale = Vector2(4.25, 1.4)
+texture = ExtResource("cloud")
+modulate = Color(0.48, 0.95, 1, 1)
+
+[node name="Rail" type="Line2D" parent="PhaseEast"]
+points = PackedVector2Array(-34, -8, 34, -8)
+width = 2.0
+default_color = Color(0.39, 0.97, 0.9, 1)
+
+[node name="Surface" type="CollisionShape2D" parent="PhaseEast"]
+shape = SubResource("PhaseEast")
+one_way_collision = true
+disabled = true
+
+[node name="RecoveryDeck" type="StaticBody2D" parent="."]
+position = Vector2(957, -500)
+
+[node name="Cloud" type="Sprite2D" parent="RecoveryDeck"]
+scale = Vector2(9.0625, 1.4)
+texture = ExtResource("cloud")
+
+[node name="Rail" type="Line2D" parent="RecoveryDeck"]
+points = PackedVector2Array(-72.5, -8, 72.5, -8)
+width = 2.0
+default_color = Color(0.39, 0.97, 0.9, 1)
+
+[node name="Surface" type="CollisionShape2D" parent="RecoveryDeck"]
+shape = SubResource("RecoveryDeck")
+one_way_collision = true
+
+[node name="Summit" type="StaticBody2D" parent="."]
+position = Vector2(1180, -612)
+
+[node name="Cloud" type="Sprite2D" parent="Summit"]
+scale = Vector2(11.4375, 1.4)
+texture = ExtResource("cloud")
+
+[node name="Rail" type="Line2D" parent="Summit"]
+points = PackedVector2Array(-91.5, -8, 91.5, -8)
+width = 2.0
+default_color = Color(0.39, 0.97, 0.9, 1)
+
+[node name="Surface" type="CollisionShape2D" parent="Summit"]
+shape = SubResource("Summit")
+one_way_collision = true
+
+[node name="EastSpring" parent="." instance=ExtResource("spring")]
+position = Vector2(68, 0)
+bounce_velocity = Vector2(248, -650)
+starts_powered = false
+
+[node name="ReverseSpring" parent="." instance=ExtResource("spring")]
+position = Vector2(192, -134)
+bounce_velocity = Vector2(-236, -650)
+starts_powered = false
+
+[node name="Direction" type="Label" parent="."]
+position = Vector2(182, -186)
+text = "←"
+theme_override_font_sizes/font_size = 18
+z_index = 3
+
+[node name="WestSpring" parent="." instance=ExtResource("spring")]
+position = Vector2(53, -274)
+bounce_velocity = Vector2(248, -665)
+starts_powered = false
+
+[node name="SummitSpring" parent="." instance=ExtResource("spring")]
+position = Vector2(1000, -508)
+bounce_velocity = Vector2(239, -645)
+starts_powered = true
+
+[node name="Terminals" type="Node2D" parent="."]
+
+[node name="Launch" type="Node2D" parent="Terminals"]
+position = Vector2(-40, -24)
+
+[node name="Light" type="Polygon2D" parent="Terminals/Launch"]
+polygon = PackedVector2Array(-17, 12, 17, 12, 14, 20, -14, 20)
+color = Color(0.68, 0.42, 0.28, 1)
+
+[node name="Hint" type="Label" parent="Terminals/Launch"]
+offset_left = -83.0
+offset_right = 83.0
+offset_top = -52.0
+theme_override_font_sizes/font_size = 13
+theme_override_colors/font_outline_color = Color(0.08, 0.1, 0.17, 1)
+theme_override_constants/outline_size = 3
+horizontal_alignment = 1
+text = "Step here · Launch right"
+
+[node name="Reverse" type="Node2D" parent="Terminals"]
+position = Vector2(270, -149)
+
+[node name="Light" type="Polygon2D" parent="Terminals/Reverse"]
+polygon = PackedVector2Array(-17, 12, 17, 12, 14, 20, -14, 20)
+color = Color(0.68, 0.42, 0.28, 1)
+
+[node name="Hint" type="Label" parent="Terminals/Reverse"]
+offset_left = -83.0
+offset_right = 83.0
+offset_top = -52.0
+theme_override_font_sizes/font_size = 13
+theme_override_colors/font_outline_color = Color(0.08, 0.1, 0.17, 1)
+theme_override_constants/outline_size = 3
+horizontal_alignment = 1
+text = "Step here · Launch left"
+
+[node name="Reroute" type="Node2D" parent="Terminals"]
+position = Vector2(-23, -289)
+
+[node name="Light" type="Polygon2D" parent="Terminals/Reroute"]
+polygon = PackedVector2Array(-17, 12, 17, 12, 14, 20, -14, 20)
+color = Color(0.68, 0.42, 0.28, 1)
+
+[node name="Hint" type="Label" parent="Terminals/Reroute"]
+offset_left = -83.0
+offset_right = 83.0
+offset_top = -52.0
+theme_override_font_sizes/font_size = 13
+theme_override_colors/font_outline_color = Color(0.08, 0.1, 0.17, 1)
+theme_override_constants/outline_size = 3
+horizontal_alignment = 1
+text = "Step here · Launch right"
+
+[node name="Bridge" type="Node2D" parent="Terminals"]
+position = Vector2(552, -463)
+
+[node name="Light" type="Polygon2D" parent="Terminals/Bridge"]
+polygon = PackedVector2Array(-17, 12, 17, 12, 14, 20, -14, 20)
+color = Color(0.68, 0.42, 0.28, 1)
+
+[node name="Hint" type="Label" parent="Terminals/Bridge"]
+offset_left = -83.0
+offset_right = 83.0
+offset_top = -52.0
+theme_override_font_sizes/font_size = 13
+theme_override_colors/font_outline_color = Color(0.08, 0.1, 0.17, 1)
+theme_override_constants/outline_size = 3
+horizontal_alignment = 1
+text = "Step here · Phase bridge"
+
+[node name="EastCheckpoint" parent="." instance=ExtResource("flag")]
+position = Vector2(270, -152)
+
+[node name="WestCheckpoint" parent="." instance=ExtResource("flag")]
+position = Vector2(-30, -293)
+
+[node name="LiftCheckpoint" parent="." instance=ExtResource("flag")]
+position = Vector2(253, -426)
+
+[node name="BridgeCheckpoint" parent="." instance=ExtResource("flag")]
+position = Vector2(551, -461)
+
+[node name="FinalCheckpoint" parent="." instance=ExtResource("flag")]
+position = Vector2(933, -526)
+
+[node name="TransferLift" type="AnimatableBody2D" parent="."]
+position = Vector2(410, -424)
+
+[node name="Cloud" type="Sprite2D" parent="TransferLift"]
+scale = Vector2(4.25, 1.35)
+texture = ExtResource("cloud")
+
+[node name="BrassRail" type="Line2D" parent="TransferLift"]
+points = PackedVector2Array(-34, -7, 34, -7)
+width = 3.0
+default_color = Color(0.97, 0.71, 0.4, 1)
+
+[node name="Surface" type="CollisionShape2D" parent="TransferLift"]
+shape = SubResource("TransferLift")
+one_way_collision = true
+
+[node name="LiftHint" type="Label" parent="."]
+position = Vector2(251, -463)
+text = "Jump onto the moving lift"
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_outline_color = Color(0.08, 0.1, 0.17, 1)
+theme_override_constants/outline_size = 4
+
+
+[node name="BridgeDischarge" parent="." instance=ExtResource("beam")]
+position = Vector2(752, -503)
+beam_size = Vector2(14, 133)
+safe_time = 2.7
+warning_time = 0.78
+danger_time = 0.72
+damage_interval = 0.16
+
+[node name="SpawnPoint" type="Marker2D" parent="."]
+position = Vector2(-70, -22)
+
+[node name="player" parent="." instance=ExtResource("player")]
+position = Vector2(-70, -22)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-70, -22)
+zoom = Vector2(1.75, 1.75)
+
+[node name="killzone" parent="." instance=ExtResource("kill")]
+position = Vector2(450, 305)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="killzone"]
+shape = SubResource("Fall")
+
+[node name="exit" parent="." instance=ExtResource("exit")]
+position = Vector2(1225, -638)
+visible = false
+monitoring = false
+standalone_destination = "res://sceans/level5.tscn"
+
+[node name="HUD" type="CanvasLayer" parent="."]
+layer = 1
+
+[node name="Status" type="Label" parent="HUD"]
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -325.0
+offset_right = 325.0
+offset_top = 18.0
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_outline_color = Color(0.08, 0.1, 0.17, 1)
+theme_override_constants/outline_size = 5
+horizontal_alignment = 1

@@ -1,0 +1,56 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/clock_dial.gd" id="1_script"]
+
+[sub_resource type="RectangleShape2D" id="dial_shape"]
+size = Vector2(72, 48)
+
+[node name="ClockDial" type="Area2D"]
+collision_layer = 0
+script = ExtResource("1_script")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("dial_shape")
+
+[node name="Face" type="Polygon2D" parent="."]
+position = Vector2(0, -46)
+modulate = Color(0.57, 0.62, 0.72, 1)
+color = Color(0.12, 0.17, 0.25, 1)
+polygon = PackedVector2Array(-13, -31, 13, -31, 28, -18, 31, 0, 28, 18, 13, 31, -13, 31, -28, 18, -31, 0, -28, -18)
+
+[node name="Rim" type="Line2D" parent="Face"]
+points = PackedVector2Array(-13, -31, 13, -31, 28, -18, 31, 0, 28, 18, 13, 31, -13, 31, -28, 18, -31, 0, -28, -18, -13, -31)
+width = 2.0
+default_color = Color(0.92, 0.67, 0.36, 1)
+
+[node name="Six" type="Label" parent="Face"]
+offset_left = -16.0
+offset_right = 16.0
+offset_top = 14.0
+theme_override_colors/font_color = Color(1, 0.82, 0.52, 1)
+theme_override_font_sizes/font_size = 10
+text = "VI"
+horizontal_alignment = 1
+
+[node name="Twelve" type="Label" parent="Face"]
+offset_left = -16.0
+offset_right = 16.0
+offset_top = -31.0
+theme_override_font_sizes/font_size = 9
+text = "XII"
+horizontal_alignment = 1
+
+[node name="Hand" type="Polygon2D" parent="."]
+position = Vector2(0, -46)
+color = Color(1, 0.67, 0.36, 1)
+polygon = PackedVector2Array(-3, 3, -2, -12, 0, -20, 2, -12, 3, 3)
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = -140.0
+offset_right = 140.0
+offset_top = -98.0
+theme_override_colors/font_shadow_color = Color(0.1, 0.06, 0.1, 1)
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 13
+horizontal_alignment = 1

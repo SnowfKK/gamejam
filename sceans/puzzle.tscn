@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://5a6uhmhm1ycq"]
+
+[ext_resource type="Script" uid="uid://bo3iq5n1a3y83" path="res://sceans/puzzle.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://sceans/puzzle_button.tscn" id="2_button"]
+[ext_resource type="Texture2D" uid="uid://c242xjtjs6w55" path="res://assets/woodplatform.png" id="platform_tex"]
+
+[sub_resource type="RectangleShape2D" id="mid_relay_deck"]
+size = Vector2(66, 12)
+
+[sub_resource type="RectangleShape2D" id="high_relay_deck"]
+size = Vector2(92, 14)
+
+[sub_resource type="RectangleShape2D" id="bridge_shape"]
+size = Vector2(136, 20)
+
+[node name="Puzzle" type="Node2D" unique_id=1224717261]
+script = ExtResource("1_script")
+
+[node name="Button1" parent="." unique_id=1127071227 instance=ExtResource("2_button")]
+position = Vector2(184, -34)
+
+[node name="Button2" parent="." unique_id=1436937460 instance=ExtResource("2_button")]
+position = Vector2(329, -66)
+
+[node name="Button3" parent="." unique_id=1786358651 instance=ExtResource("2_button")]
+position = Vector2(550, -112)
+
+[node name="MidRelayDeck" type="StaticBody2D" parent="." unique_id=830105800]
+position = Vector2(329, -58)
+
+[node name="Deck" type="Sprite2D" parent="MidRelayDeck" unique_id=1847710515]
+scale = Vector2(4.125, 0.75)
+texture = ExtResource("platform_tex")
+
+[node name="Surface" type="CollisionShape2D" parent="MidRelayDeck" unique_id=158354000]
+shape = SubResource("mid_relay_deck")
+one_way_collision = true
+
+[node name="HighRelayDeck" type="StaticBody2D" parent="." unique_id=1434981513]
+position = Vector2(550, -103)
+
+[node name="Deck" type="Sprite2D" parent="HighRelayDeck" unique_id=1310658148]
+scale = Vector2(5.75, 0.875)
+texture = ExtResource("platform_tex")
+
+[node name="Surface" type="CollisionShape2D" parent="HighRelayDeck" unique_id=388187152]
+shape = SubResource("high_relay_deck")
+one_way_collision = true
+
+[node name="MidwayCheckpoint" type="Marker2D" parent="." unique_id=110532136]
+position = Vector2(320, -80)
+
+[node name="Bridge" type="StaticBody2D" parent="." unique_id=1991888749]
+position = Vector2(658, -55)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bridge" unique_id=366057844]
+shape = SubResource("bridge_shape")
+disabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Bridge" unique_id=885772637]
+scale = Vector2(8.5, 1.25)
+texture = ExtResource("platform_tex")
+
+[node name="Checkpoint" type="Marker2D" parent="." unique_id=22491974]
+position = Vector2(548, -62)
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1861621683]
+
+[node name="Status" type="Label" parent="HUD" unique_id=1897058603]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -240.0
+offset_top = 18.0
+offset_right = 240.0
+theme_override_colors/font_shadow_color = Color(0.08, 0.1, 0.17, 1)
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 20
+text = "Step on the relays · 0 / 3"
+horizontal_alignment = 1

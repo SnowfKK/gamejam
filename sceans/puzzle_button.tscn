@@ -1,0 +1,27 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" uid="uid://c242xjtjs6w55" path="res://assets/woodplatform.png" id="platform_tex"]
+
+[sub_resource type="RectangleShape2D" id="button_shape"]
+size = Vector2(40, 20)
+
+[node name="PuzzleButton" type="Area2D"]
+collision_mask = 1
+monitoring = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("button_shape")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -2)
+scale = Vector2(2.5, 0.5)
+texture = ExtResource("platform_tex")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = 5
+offset_left = -20.0
+offset_top = -7.0
+offset_right = 20.0
+offset_bottom = 2.0
+color = Color(0.2, 0.8, 1.0, 0.5)

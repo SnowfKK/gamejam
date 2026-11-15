@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://8spi7w30o22f"]
+
+[ext_resource type="Script" uid="uid://jm4kwbk24nsj" path="res://scripts/sun_hazard.gd" id="1_script"]
+
+[sub_resource type="RectangleShape2D" id="hazard_shape"]
+size = Vector2(60, 60)
+
+[node name="SunHazard" type="Area2D" unique_id=858516885]
+script = ExtResource("1_script")
+safe_time = 10.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=143995436]
+shape = SubResource("hazard_shape")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1241822926]
+z_index = 5
+mouse_filter = 2
+offset_right = 60.0
+offset_bottom = 60.0
+color = Color(1, 0.8, 0.2, 0.28)
+
+[node name="Laser" type="Line2D" parent="." unique_id=1437598251]
+z_index = 6
+width = 8.0
+default_color = Color(1, 0.95, 0.4, 0.9)
+points = PackedVector2Array(0, -300, 0, 300)
+
+[node name="CooldownBar" type="ProgressBar" parent="." unique_id=723078012]
+z_index = 7
+offset_left = -30.0
+offset_top = -70.0
+offset_right = 30.0
+offset_bottom = -60.0
+max_value = 1.0
+step = 0.0
+show_percentage = false
+mouse_filter = 2

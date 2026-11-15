@@ -1,0 +1,112 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://sceans/sky_background.tscn" id="sky"]
+
+[ext_resource type="PackedScene" path="res://sceans/player.tscn" id="player"]
+
+[ext_resource type="PackedScene" path="res://sceans/next_level.tscn" id="exit"]
+
+[ext_resource type="PackedScene" path="res://sceans/bounce_pad.tscn" id="spring"]
+
+[ext_resource type="PackedScene" path="res://sceans/killzone.tscn" id="kill"]
+
+[ext_resource type="Texture2D" path="res://assets/cloud.png" id="route_cloud"]
+
+[ext_resource type="Script" path="res://scripts/clock_boss.gd" id="control"]
+
+[sub_resource type="RectangleShape2D" id="Arena"]
+size = Vector2(700, 16)
+
+[sub_resource type="RectangleShape2D" id="Walls"]
+size = Vector2(24, 510)
+
+[sub_resource type="RectangleShape2D" id="Fall"]
+size = Vector2(2400, 400)
+
+[node name="Clockkeeper" type="Node2D"]
+script = ExtResource("control")
+
+[node name="SkyBackground" parent="." instance=ExtResource("sky")]
+
+[node name="Arena" type="StaticBody2D" parent="."]
+position = Vector2(260, 10)
+
+[node name="Cloud" type="Sprite2D" parent="Arena"]
+scale = Vector2(43.75, 1.4)
+texture = ExtResource("route_cloud")
+
+[node name="Lip" type="Line2D" parent="Arena"]
+points = PackedVector2Array(-350, -8, 350, -8)
+width = 2.0
+default_color = Color(0.69, 0.91, 1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arena"]
+shape = SubResource("Arena")
+
+[node name="WestRailing" type="StaticBody2D" parent="."]
+position = Vector2(-86, -244)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WestRailing"]
+shape = SubResource("Walls")
+
+[node name="EastRailing" type="StaticBody2D" parent="."]
+position = Vector2(606, -244)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EastRailing"]
+shape = SubResource("Walls")
+
+[node name="WestSpring" parent="." instance=ExtResource("spring")]
+position = Vector2(117, -1)
+bounce_velocity = Vector2(230, -555)
+
+[node name="EastSpring" parent="." instance=ExtResource("spring")]
+position = Vector2(403, -1)
+bounce_velocity = Vector2(-230, -555)
+
+[node name="SpawnPoint" type="Marker2D" parent="."]
+position = Vector2(-26, -22)
+
+[node name="player" parent="." instance=ExtResource("player")]
+position = Vector2(-26, -22)
+
+[node name="Camera2D" type="Camera2D" parent="." groups=["fixed_camera"]]
+position = Vector2(260, -125)
+zoom = Vector2(1.48, 1.48)
+
+[node name="killzone" parent="." instance=ExtResource("kill")]
+position = Vector2(260, 420)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="killzone"]
+shape = SubResource("Fall")
+
+[node name="exit" parent="." instance=ExtResource("exit")]
+position = Vector2(539, -22)
+visible = false
+monitoring = false
+standalone_destination = "res://sceans/main_menu.tscn"
+
+[node name="HUD" type="CanvasLayer" parent="."]
+layer = 1
+
+[node name="Status" type="Label" parent="HUD"]
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_right = 300.0
+offset_top = 48.0
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_outline_color = Color(0.08, 0.1, 0.17, 1)
+theme_override_constants/outline_size = 5
+horizontal_alignment = 1
+text = "Keep moving"
+
+[node name="Counter" type="Label" parent="HUD"]
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_right = 300.0
+offset_top = 12.0
+theme_override_font_sizes/font_size = 28
+theme_override_colors/font_outline_color = Color(0.08, 0.1, 0.17, 1)
+theme_override_constants/outline_size = 5
+horizontal_alignment = 1

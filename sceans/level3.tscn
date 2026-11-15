@@ -1,0 +1,574 @@
+[gd_scene format=3 uid="uid://can5jaksjgnur"]
+
+[ext_resource type="PackedScene" path="res://sceans/clock_dial.tscn" id="dial"]
+[ext_resource type="PackedScene" uid="uid://prnsy1npqo36" path="res://sceans/next_level.tscn" id="exit"]
+[ext_resource type="PackedScene" path="res://sceans/broken_gear.tscn" id="gear"]
+[ext_resource type="PackedScene" uid="uid://b867s6fm1mae3" path="res://sceans/killzone.tscn" id="kill"]
+[ext_resource type="PackedScene" uid="uid://cj8mhq26eoiuu" path="res://sceans/player.tscn" id="player"]
+[ext_resource type="Script" uid="uid://cthvi4s3a0qyq" path="res://scripts/clock_puzzle.gd" id="puzzle"]
+[ext_resource type="PackedScene" path="res://sceans/route_checkpoint.tscn" id="route_checkpoint"]
+[ext_resource type="Texture2D" uid="uid://6l8gaxfsavp4" path="res://assets/cloud.png" id="route_cloud"]
+[ext_resource type="PackedScene" path="res://sceans/crumble_cloud.tscn" id="route_crumble"]
+[ext_resource type="PackedScene" uid="uid://8spi7w30o22f" path="res://sceans/sun_hazard.tscn" id="route_hazard"]
+[ext_resource type="PackedScene" uid="uid://c2npswig4vo2a" path="res://sceans/platforms.tscn" id="route_lift"]
+[ext_resource type="PackedScene" path="res://sceans/sky_background.tscn" id="screen_sky"]
+[ext_resource type="PackedScene" uid="uid://6a47a4423" path="res://sceans/bounce_pad.tscn" id="spring"]
+[sub_resource type="RectangleShape2D" id="Arrival"]
+size = Vector2(188, 16)
+
+[sub_resource type="RectangleShape2D" id="FirstGearDeck"]
+size = Vector2(154, 16)
+
+[sub_resource type="RectangleShape2D" id="WestPendulum"]
+size = Vector2(82, 16)
+
+[sub_resource type="RectangleShape2D" id="SecondGearDeck"]
+size = Vector2(130, 16)
+
+[sub_resource type="RectangleShape2D" id="ControlDeck"]
+size = Vector2(144, 16)
+
+[sub_resource type="RectangleShape2D" id="EastPendulum"]
+size = Vector2(80, 16)
+
+[sub_resource type="RectangleShape2D" id="GlassDeck"]
+size = Vector2(96, 16)
+
+[sub_resource type="RectangleShape2D" id="ExitDeck"]
+size = Vector2(166, 16)
+
+[sub_resource type="RectangleShape2D" id="gate"]
+size = Vector2(15, 358)
+
+[sub_resource type="RectangleShape2D" id="hand"]
+size = Vector2(18, 116)
+
+[sub_resource type="RectangleShape2D" id="BladeHitbox"]
+size = Vector2(26, 124)
+
+[sub_resource type="RectangleShape2D" id="fall"]
+size = Vector2(4600, 322)
+
+[sub_resource type="RectangleShape2D" id="TransitDeck"]
+size = Vector2(96, 16)
+
+[sub_resource type="RectangleShape2D" id="CrownDeck"]
+size = Vector2(161, 16)
+
+[node name="level3" type="Node2D" unique_id=2006816601]
+script = ExtResource("puzzle")
+
+[node name="Cables" type="Node2D" parent="." unique_id=503983893]
+
+[node name="West" type="Line2D" parent="Cables" unique_id=1552197500]
+position = Vector2(323, -217)
+points = PackedVector2Array(0, 0, 0, 178)
+width = 3.0
+default_color = Color(0.68, 0.44, 0.31, 1)
+
+[node name="East" type="Line2D" parent="Cables" unique_id=1626750751]
+position = Vector2(751, -239)
+points = PackedVector2Array(0, 0, 0, 178)
+width = 3.0
+default_color = Color(0.68, 0.44, 0.31, 1)
+
+[node name="Arrival" type="StaticBody2D" parent="." unique_id=368534560]
+position = Vector2(-16, 12)
+
+[node name="Cloud" type="Sprite2D" parent="Arrival" unique_id=560055371]
+modulate = Color(0.93, 0.89, 1, 1)
+scale = Vector2(11.75, 1.65)
+texture = ExtResource("route_cloud")
+
+[node name="Rail" type="Polygon2D" parent="Arrival" unique_id=1673111629]
+color = Color(0.78, 0.47, 0.28, 1)
+polygon = PackedVector2Array(-94, -8, 94, -8, 87, -1, -87, -1)
+
+[node name="Trim" type="Line2D" parent="Arrival" unique_id=397976679]
+points = PackedVector2Array(-94, -8, 94, -8)
+width = 2.0
+default_color = Color(1, 0.76, 0.43, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arrival" unique_id=1648167485]
+shape = SubResource("Arrival")
+
+[node name="FirstGearDeck" type="StaticBody2D" parent="." unique_id=873632823]
+position = Vector2(177, -18)
+
+[node name="Cloud" type="Sprite2D" parent="FirstGearDeck" unique_id=362722022]
+modulate = Color(0.93, 0.89, 1, 1)
+scale = Vector2(9.625, 1.65)
+texture = ExtResource("route_cloud")
+
+[node name="Rail" type="Polygon2D" parent="FirstGearDeck" unique_id=827105944]
+color = Color(0.78, 0.47, 0.28, 1)
+polygon = PackedVector2Array(-77, -8, 77, -8, 70, -1, -70, -1)
+
+[node name="Trim" type="Line2D" parent="FirstGearDeck" unique_id=1455863542]
+points = PackedVector2Array(-77, -8, 77, -8)
+width = 2.0
+default_color = Color(1, 0.76, 0.43, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FirstGearDeck" unique_id=397211369]
+shape = SubResource("FirstGearDeck")
+
+[node name="WestPendulum" type="AnimatableBody2D" parent="." unique_id=391494524]
+position = Vector2(323, -36)
+
+[node name="Cloud" type="Sprite2D" parent="WestPendulum" unique_id=754087379]
+modulate = Color(0.93, 0.89, 1, 1)
+scale = Vector2(5.125, 1.65)
+texture = ExtResource("route_cloud")
+
+[node name="Rail" type="Polygon2D" parent="WestPendulum" unique_id=2145016996]
+color = Color(0.78, 0.47, 0.28, 1)
+polygon = PackedVector2Array(-41, -8, 41, -8, 34, -1, -34, -1)
+
+[node name="Trim" type="Line2D" parent="WestPendulum" unique_id=829030030]
+points = PackedVector2Array(-41, -8, 41, -8)
+width = 2.0
+default_color = Color(1, 0.76, 0.43, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WestPendulum" unique_id=182501745]
+shape = SubResource("WestPendulum")
+
+[node name="SecondGearDeck" type="StaticBody2D" parent="." unique_id=2092966701]
+position = Vector2(452, -62)
+
+[node name="Cloud" type="Sprite2D" parent="SecondGearDeck" unique_id=311374659]
+modulate = Color(0.93, 0.89, 1, 1)
+scale = Vector2(8.125, 1.65)
+texture = ExtResource("route_cloud")
+
+[node name="Rail" type="Polygon2D" parent="SecondGearDeck" unique_id=618687788]
+color = Color(0.78, 0.47, 0.28, 1)
+polygon = PackedVector2Array(-65, -8, 65, -8, 58, -1, -58, -1)
+
+[node name="Trim" type="Line2D" parent="SecondGearDeck" unique_id=463765117]
+points = PackedVector2Array(-65, -8, 65, -8)
+width = 2.0
+default_color = Color(1, 0.76, 0.43, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SecondGearDeck" unique_id=590098784]
+shape = SubResource("SecondGearDeck")
+
+[node name="ControlDeck" type="StaticBody2D" parent="." unique_id=578000498]
+position = Vector2(617, -49)
+
+[node name="Cloud" type="Sprite2D" parent="ControlDeck" unique_id=1246279131]
+modulate = Color(0.93, 0.89, 1, 1)
+scale = Vector2(9, 1.65)
+texture = ExtResource("route_cloud")
+
+[node name="Rail" type="Polygon2D" parent="ControlDeck" unique_id=999764905]
+color = Color(0.78, 0.47, 0.28, 1)
+polygon = PackedVector2Array(-72, -8, 72, -8, 65, -1, -65, -1)
+
+[node name="Trim" type="Line2D" parent="ControlDeck" unique_id=1771487758]
+points = PackedVector2Array(-72, -8, 72, -8)
+width = 2.0
+default_color = Color(1, 0.76, 0.43, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ControlDeck" unique_id=932740191]
+shape = SubResource("ControlDeck")
+
+[node name="EastPendulum" type="AnimatableBody2D" parent="." unique_id=1321917115]
+position = Vector2(751, -61)
+
+[node name="Cloud" type="Sprite2D" parent="EastPendulum" unique_id=1954720600]
+modulate = Color(0.93, 0.89, 1, 1)
+scale = Vector2(5, 1.65)
+texture = ExtResource("route_cloud")
+
+[node name="Rail" type="Polygon2D" parent="EastPendulum" unique_id=14707389]
+color = Color(0.78, 0.47, 0.28, 1)
+polygon = PackedVector2Array(-40, -8, 40, -8, 33, -1, -33, -1)
+
+[node name="Trim" type="Line2D" parent="EastPendulum" unique_id=268736089]
+points = PackedVector2Array(-40, -8, 40, -8)
+width = 2.0
+default_color = Color(1, 0.76, 0.43, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EastPendulum" unique_id=478706812]
+shape = SubResource("EastPendulum")
+
+[node name="GlassDeck" type="StaticBody2D" parent="." unique_id=612497253]
+position = Vector2(853, -80)
+
+[node name="Cloud" type="Sprite2D" parent="GlassDeck" unique_id=321710845]
+modulate = Color(0.93, 0.89, 1, 1)
+scale = Vector2(6, 1.65)
+texture = ExtResource("route_cloud")
+
+[node name="Rail" type="Polygon2D" parent="GlassDeck" unique_id=1501603783]
+color = Color(0.78, 0.47, 0.28, 1)
+polygon = PackedVector2Array(-48, -8, 48, -8, 41, -1, -41, -1)
+
+[node name="Trim" type="Line2D" parent="GlassDeck" unique_id=116355676]
+points = PackedVector2Array(-48, -8, 48, -8)
+width = 2.0
+default_color = Color(1, 0.76, 0.43, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GlassDeck" unique_id=392066016]
+shape = SubResource("GlassDeck")
+
+[node name="ExitDeck" type="StaticBody2D" parent="." unique_id=2020406084]
+position = Vector2(1015, -220)
+
+[node name="Cloud" type="Sprite2D" parent="ExitDeck" unique_id=808546907]
+modulate = Color(0.93, 0.89, 1, 1)
+scale = Vector2(10.375, 1.65)
+texture = ExtResource("route_cloud")
+
+[node name="Rail" type="Polygon2D" parent="ExitDeck" unique_id=1197165975]
+color = Color(0.78, 0.47, 0.28, 1)
+polygon = PackedVector2Array(-83, -8, 83, -8, 76, -1, -76, -1)
+
+[node name="Trim" type="Line2D" parent="ExitDeck" unique_id=148169364]
+points = PackedVector2Array(-83, -8, 83, -8)
+width = 2.0
+default_color = Color(1, 0.76, 0.43, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitDeck" unique_id=1298547712]
+shape = SubResource("ExitDeck")
+one_way_collision = true
+
+[node name="FirstGate" type="StaticBody2D" parent="." unique_id=1141493671]
+position = Vector2(255, -45)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FirstGate" unique_id=142928812]
+shape = SubResource("gate")
+
+[node name="Frame" type="Polygon2D" parent="FirstGate" unique_id=1676852271]
+color = Color(0.34, 0.22, 0.29, 1)
+polygon = PackedVector2Array(-8, -179, 8, -179, 8, 179, -8, 179)
+
+[node name="Lock1" type="Polygon2D" parent="FirstGate" unique_id=1248363667]
+position = Vector2(0, -126)
+color = Color(0.97, 0.52, 0.39, 1)
+polygon = PackedVector2Array(0, -7, 5, 0, 0, 7, -5, 0)
+
+[node name="Lock2" type="Polygon2D" parent="FirstGate" unique_id=923691617]
+position = Vector2(0, -84)
+color = Color(0.97, 0.52, 0.39, 1)
+polygon = PackedVector2Array(0, -7, 5, 0, 0, 7, -5, 0)
+
+[node name="Lock3" type="Polygon2D" parent="FirstGate" unique_id=690339631]
+position = Vector2(0, -42)
+color = Color(0.97, 0.52, 0.39, 1)
+polygon = PackedVector2Array(0, -7, 5, 0, 0, 7, -5, 0)
+
+[node name="Lock4" type="Polygon2D" parent="FirstGate" unique_id=1277107730]
+color = Color(0.97, 0.52, 0.39, 1)
+polygon = PackedVector2Array(0, -7, 5, 0, 0, 7, -5, 0)
+
+[node name="Lock5" type="Polygon2D" parent="FirstGate" unique_id=1558893104]
+position = Vector2(0, 42)
+color = Color(0.97, 0.52, 0.39, 1)
+polygon = PackedVector2Array(0, -7, 5, 0, 0, 7, -5, 0)
+
+[node name="Lock6" type="Polygon2D" parent="FirstGate" unique_id=121225079]
+position = Vector2(0, 84)
+color = Color(0.97, 0.52, 0.39, 1)
+polygon = PackedVector2Array(0, -7, 5, 0, 0, 7, -5, 0)
+
+[node name="Lock7" type="Polygon2D" parent="FirstGate" unique_id=1873169596]
+position = Vector2(0, 126)
+color = Color(0.97, 0.52, 0.39, 1)
+polygon = PackedVector2Array(0, -7, 5, 0, 0, 7, -5, 0)
+
+[node name="SecondGate" type="StaticBody2D" parent="." unique_id=276278574]
+position = Vector2(535, -45)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SecondGate" unique_id=72483534]
+shape = SubResource("gate")
+
+[node name="Frame" type="Polygon2D" parent="SecondGate" unique_id=699284165]
+color = Color(0.34, 0.22, 0.29, 1)
+polygon = PackedVector2Array(-8, -179, 8, -179, 8, 179, -8, 179)
+
+[node name="Lock1" type="Polygon2D" parent="SecondGate" unique_id=1335584405]
+position = Vector2(0, -126)
+color = Color(0.97, 0.52, 0.39, 1)
+polygon = PackedVector2Array(0, -7, 5, 0, 0, 7, -5, 0)
+
+[node name="Lock2" type="Polygon2D" parent="SecondGate" unique_id=1387766354]
+position = Vector2(0, -84)
+color = Color(0.97, 0.52, 0.39, 1)
+polygon = PackedVector2Array(0, -7, 5, 0, 0, 7, -5, 0)
+
+[node name="Lock3" type="Polygon2D" parent="SecondGate" unique_id=235368000]
+position = Vector2(0, -42)
+color = Color(0.97, 0.52, 0.39, 1)
+polygon = PackedVector2Array(0, -7, 5, 0, 0, 7, -5, 0)
+
+[node name="Lock4" type="Polygon2D" parent="SecondGate" unique_id=1226600975]
+color = Color(0.97, 0.52, 0.39, 1)
+polygon = PackedVector2Array(0, -7, 5, 0, 0, 7, -5, 0)
+
+[node name="Lock5" type="Polygon2D" parent="SecondGate" unique_id=952649217]
+position = Vector2(0, 42)
+color = Color(0.97, 0.52, 0.39, 1)
+polygon = PackedVector2Array(0, -7, 5, 0, 0, 7, -5, 0)
+
+[node name="Lock6" type="Polygon2D" parent="SecondGate" unique_id=1117610595]
+position = Vector2(0, 84)
+color = Color(0.97, 0.52, 0.39, 1)
+polygon = PackedVector2Array(0, -7, 5, 0, 0, 7, -5, 0)
+
+[node name="Lock7" type="Polygon2D" parent="SecondGate" unique_id=1129088081]
+position = Vector2(0, 126)
+color = Color(0.97, 0.52, 0.39, 1)
+polygon = PackedVector2Array(0, -7, 5, 0, 0, 7, -5, 0)
+
+[node name="ExitGate" type="StaticBody2D" parent="." unique_id=468987174]
+position = Vector2(921, -45)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitGate" unique_id=307578177]
+shape = SubResource("gate")
+
+[node name="Frame" type="Polygon2D" parent="ExitGate" unique_id=959593600]
+color = Color(0.34, 0.22, 0.29, 1)
+polygon = PackedVector2Array(-8, -179, 8, -179, 8, 179, -8, 179)
+
+[node name="Lock1" type="Polygon2D" parent="ExitGate" unique_id=1069859116]
+position = Vector2(0, -126)
+color = Color(0.97, 0.52, 0.39, 1)
+polygon = PackedVector2Array(0, -7, 5, 0, 0, 7, -5, 0)
+
+[node name="Lock2" type="Polygon2D" parent="ExitGate" unique_id=1116127502]
+position = Vector2(0, -84)
+color = Color(0.97, 0.52, 0.39, 1)
+polygon = PackedVector2Array(0, -7, 5, 0, 0, 7, -5, 0)
+
+[node name="Lock3" type="Polygon2D" parent="ExitGate" unique_id=1783256674]
+position = Vector2(0, -42)
+color = Color(0.97, 0.52, 0.39, 1)
+polygon = PackedVector2Array(0, -7, 5, 0, 0, 7, -5, 0)
+
+[node name="Lock4" type="Polygon2D" parent="ExitGate" unique_id=1946628112]
+color = Color(0.97, 0.52, 0.39, 1)
+polygon = PackedVector2Array(0, -7, 5, 0, 0, 7, -5, 0)
+
+[node name="Lock5" type="Polygon2D" parent="ExitGate" unique_id=2074037006]
+position = Vector2(0, 42)
+color = Color(0.97, 0.52, 0.39, 1)
+polygon = PackedVector2Array(0, -7, 5, 0, 0, 7, -5, 0)
+
+[node name="Lock6" type="Polygon2D" parent="ExitGate" unique_id=1832655036]
+position = Vector2(0, 84)
+color = Color(0.97, 0.52, 0.39, 1)
+polygon = PackedVector2Array(0, -7, 5, 0, 0, 7, -5, 0)
+
+[node name="Lock7" type="Polygon2D" parent="ExitGate" unique_id=1287031841]
+position = Vector2(0, 126)
+color = Color(0.97, 0.52, 0.39, 1)
+polygon = PackedVector2Array(0, -7, 5, 0, 0, 7, -5, 0)
+
+[node name="BladeWarning" type="Label" parent="." unique_id=1022505649]
+offset_left = 372.0
+offset_top = -49.0
+offset_right = 530.0
+theme_override_colors/font_shadow_color = Color(0.08, 0.1, 0.17, 1)
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 10
+text = "Cross when the red hand points up"
+horizontal_alignment = 1
+
+[node name="ClockHand" type="AnimatableBody2D" parent="." unique_id=1162287909]
+position = Vector2(515, -173)
+rotation = -1.1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClockHand" unique_id=524081666]
+position = Vector2(0, -47)
+shape = SubResource("hand")
+
+[node name="Metal" type="Polygon2D" parent="ClockHand" unique_id=2077871946]
+color = Color(0.57, 0.34, 0.23, 1)
+polygon = PackedVector2Array(-9, 11, -9, -105, 9, -105, 9, 11)
+
+[node name="Edge" type="Polygon2D" parent="ClockHand" unique_id=1074229495]
+color = Color(0.97, 0.72, 0.4, 1)
+polygon = PackedVector2Array(-6, -102, 0, -115, 6, -102, 4, -4, -4, -4)
+
+[node name="Bolt" type="Polygon2D" parent="ClockHand" unique_id=442631010]
+color = Color(0.25, 0.18, 0.24, 1)
+polygon = PackedVector2Array(-7, -4, -4, -7, 4, -7, 7, -4, 7, 4, 4, 7, -4, 7, -7, 4)
+
+[node name="BladeHitbox" type="Area2D" parent="ClockHand" unique_id=1114419197]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClockHand/BladeHitbox" unique_id=1057561685]
+position = Vector2(0, -55)
+shape = SubResource("BladeHitbox")
+
+[node name="Gear1" parent="." unique_id=1772916754 instance=ExtResource("gear")]
+position = Vector2(182, -47)
+
+[node name="Gear2" parent="." unique_id=1570637677 instance=ExtResource("gear")]
+position = Vector2(455, -91)
+
+[node name="ClockDial" parent="." unique_id=508677999 instance=ExtResource("dial")]
+position = Vector2(622, -77)
+
+[node name="Hazards" type="Node2D" parent="." unique_id=780568364]
+
+[node name="SunHazard1" parent="Hazards" unique_id=1712545904 instance=ExtResource("route_hazard")]
+position = Vector2(276, -161)
+rotation = -0.13
+safe_time = 3.65
+warning_time = 0.9
+danger_time = 1.3
+damage_interval = 0.15
+phase_offset = 2.7
+beam_size = Vector2(13, 305)
+
+[node name="SunHazard2" parent="Hazards" unique_id=231588606 instance=ExtResource("route_hazard")]
+position = Vector2(116, -161)
+rotation = 0.13
+safe_time = 3.65
+warning_time = 0.9
+danger_time = 1.3
+damage_interval = 0.15
+phase_offset = 0.9
+beam_size = Vector2(13, 305)
+
+[node name="SunHazard3" parent="Hazards" unique_id=1335880360 instance=ExtResource("route_hazard")]
+position = Vector2(762, -161)
+rotation = -0.1
+safe_time = 3.65
+warning_time = 0.9
+danger_time = 1.3
+damage_interval = 0.15
+phase_offset = 1.9
+beam_size = Vector2(13, 305)
+
+[node name="SunHazard4" parent="Hazards" unique_id=708912318 instance=ExtResource("route_hazard")]
+position = Vector2(870, -161)
+rotation = 0.1
+safe_time = 3.65
+warning_time = 0.9
+danger_time = 1.3
+damage_interval = 0.15
+phase_offset = 3.8
+beam_size = Vector2(13, 305)
+
+[node name="killzone" parent="." unique_id=1825828398 instance=ExtResource("kill")]
+position = Vector2(515, 263)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="killzone" unique_id=1819820876]
+shape = SubResource("fall")
+
+[node name="ClockSpring" parent="." unique_id=1590270899 instance=ExtResource("spring")]
+position = Vector2(866, -86)
+bounce_velocity = Vector2(235, -650)
+starts_powered = false
+
+[node name="Gear1Checkpoint" type="Marker2D" parent="." unique_id=750526205]
+position = Vector2(155, -42)
+
+[node name="Gear2Checkpoint" type="Marker2D" parent="." unique_id=987085211]
+position = Vector2(388, -85)
+
+[node name="ClockCheckpoint" type="Marker2D" parent="." unique_id=238773931]
+position = Vector2(642, -73)
+
+[node name="EscapementLift" parent="." unique_id=1573181496 instance=ExtResource("route_lift")]
+position = Vector2(1146, -213)
+scale = Vector2(1.54, 1)
+move_distance = 91.0
+duration = 1.74
+
+[node name="MinuteRatchet" parent="." unique_id=152347958 instance=ExtResource("route_crumble")]
+position = Vector2(1351, -292)
+
+[node name="HourRatchet" parent="." unique_id=1137190888 instance=ExtResource("route_crumble")]
+position = Vector2(1435, -319)
+hold_time = 0.44
+
+[node name="EscapementBeam" parent="." unique_id=1653272506 instance=ExtResource("route_hazard")]
+position = Vector2(1202, -350)
+safe_time = 3.6
+warning_time = 0.92
+danger_time = 0.82
+damage_interval = 0.15
+phase_offset = 0.5
+beam_size = Vector2(15, 166)
+
+[node name="CrownBeam" parent="." unique_id=1007631959 instance=ExtResource("route_hazard")]
+position = Vector2(1405, -371)
+safe_time = 3.35
+warning_time = 0.94
+danger_time = 1.0
+damage_interval = 0.15
+phase_offset = 2.1
+beam_size = Vector2(14, 147)
+
+[node name="TransitDeck" type="StaticBody2D" parent="." unique_id=1347577420]
+position = Vector2(1257, -260)
+
+[node name="Cloud" type="Sprite2D" parent="TransitDeck" unique_id=773207234]
+scale = Vector2(6, 1.3)
+texture = ExtResource("route_cloud")
+
+[node name="Lip" type="Line2D" parent="TransitDeck" unique_id=1000128939]
+points = PackedVector2Array(-48, -8, 48, -8)
+width = 2.0
+default_color = Color(0.69, 0.91, 1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitDeck" unique_id=1796463904]
+shape = SubResource("TransitDeck")
+one_way_collision = true
+
+[node name="CrownDeck" type="StaticBody2D" parent="." unique_id=2012549485]
+position = Vector2(1569, -345)
+
+[node name="Cloud" type="Sprite2D" parent="CrownDeck" unique_id=1104945281]
+scale = Vector2(10.0625, 1.3)
+texture = ExtResource("route_cloud")
+
+[node name="Lip" type="Line2D" parent="CrownDeck" unique_id=1052982109]
+points = PackedVector2Array(-80.5, -8, 80.5, -8)
+width = 2.0
+default_color = Color(0.69, 0.91, 1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CrownDeck" unique_id=1703053577]
+shape = SubResource("CrownDeck")
+one_way_collision = true
+
+[node name="RouteCheckpoint" parent="." unique_id=1946647775 instance=ExtResource("route_checkpoint")]
+position = Vector2(1005, -247)
+
+[node name="exit" parent="." unique_id=1741820296 instance=ExtResource("exit")]
+visible = false
+position = Vector2(1590, -369)
+monitoring = false
+standalone_destination = "res://sceans/level4.tscn"
+
+[node name="SpawnPoint" type="Marker2D" parent="." unique_id=1514925873]
+position = Vector2(-57, -28)
+
+[node name="player" parent="." unique_id=674766359 instance=ExtResource("player")]
+position = Vector2(-57, -28)
+
+[node name="SkyBackground" parent="." unique_id=557776819 instance=ExtResource("screen_sky")]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1188657954]
+position = Vector2(-57, -28)
+zoom = Vector2(1.55, 1.55)
+
+[node name="Objectives" type="CanvasLayer" parent="." unique_id=1257939104]
+
+[node name="Objective" type="Label" parent="Objectives" unique_id=2011431363]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -220.0
+offset_top = 18.0
+offset_right = 220.0
+theme_override_colors/font_shadow_color = Color(0.15, 0.09, 0.16, 1)
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 20
+text = "Repair the gears · 0 / 2"
+horizontal_alignment = 1
+

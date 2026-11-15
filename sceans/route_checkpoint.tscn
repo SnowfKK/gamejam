@@ -1,0 +1,22 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/route_checkpoint.gd" id="script"]
+
+[sub_resource type="RectangleShape2D" id="area"]
+size = Vector2(36, 58)
+
+[node name="RouteCheckpoint" type="Area2D"]
+collision_layer = 0
+script = ExtResource("script")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("area")
+
+[node name="Pole" type="Line2D" parent="."]
+points = PackedVector2Array(0, 18, 0, -26)
+width = 2.0
+default_color = Color(0.29, 0.24, 0.42, 1)
+
+[node name="Flag" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, -26, 24, -23, 18, -16, 24, -10, 0, -10)
+color = Color(0.91, 0.68, 0.36, 1)

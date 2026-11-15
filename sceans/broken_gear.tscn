@@ -1,0 +1,30 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/broken_gear.gd" id="1_script"]
+
+[sub_resource type="RectangleShape2D" id="gear_shape"]
+size = Vector2(76, 54)
+
+[node name="BrokenGear" type="Area2D"]
+collision_layer = 0
+script = ExtResource("1_script")
+
+[node name="Gear" type="Polygon2D" parent="."]
+
+[node name="Spokes" type="Polygon2D" parent="Gear"]
+color = Color(0.27, 0.16, 0.18, 1)
+polygon = PackedVector2Array(-4, -14, 4, -14, 4, -4, 14, -4, 14, 4, 4, 4, 4, 14, -4, 14, -4, 4, -14, 4, -14, -4, -4, -4)
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = -80.0
+offset_top = -42.0
+offset_right = 80.0
+theme_override_colors/font_shadow_color = Color(0.1, 0.06, 0.1, 1)
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 12
+text = "E / Enter · Repair"
+horizontal_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("gear_shape")

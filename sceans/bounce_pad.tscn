@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://594694423"]
+
+[ext_resource type="Script" path="res://scripts/bounce_pad.gd" id="1_pad"]
+[ext_resource type="Texture2D" uid="uid://c242xjtjs6w55" path="res://assets/woodplatform.png" id="2_tex"]
+[ext_resource type="AudioStream" uid="uid://dw7rmdxy80n72" path="res://addons/GodotTogether/src/scripts/extras/halloween/knock2.ogg" id="3_sfx"]
+
+[sub_resource type="RectangleShape2D" id="pad_shape"]
+size = Vector2(56, 20)
+
+[node name="bounce_pad" type="Area2D"]
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("1_pad")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+scale = Vector2(3.5, 1)
+texture = ExtResource("2_tex")
+
+[node name="Glow" type="Line2D" parent="Sprite2D"]
+points = PackedVector2Array(-7, -8, 7, -8)
+width = 1.7
+default_color = Color(0.38, 0.97, 0.81, 1)
+
+[node name="Arrows" type="Line2D" parent="."]
+position = Vector2(0, -25)
+points = PackedVector2Array(-7, 4, 0, -3, 7, 4)
+width = 2.0
+default_color = Color(0.47, 1, 0.88, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -10)
+shape = SubResource("pad_shape")
+
+[node name="Sfx" type="AudioStreamPlayer2D" parent="."]
+bus = &"SFX"
+stream = ExtResource("3_sfx")
