@@ -2,8 +2,17 @@
 
 [ext_resource type="Script" uid="uid://m0aigynr6371" path="res://scripts/main_menu.gd" id="1_fax0a"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ote24"]
-load_path = "res://.godot/imported/woodplatform.png-8b099a35107dca151a4a4f1d61d1a10c.ctex"
+[ext_resource type="Texture2D" path="res://assets/menu.png" id="2_bg"]
+[ext_resource type="Texture2D" path="res://assets/Sprite-0014.png" id="3_style"]
+[ext_resource type="AudioStream" path="res://assets/hyde-indie-rock-arctic-monkeys-styled-instrumental.mp3" id="4_track"]
+
+[sub_resource type="StyleBoxTexture" id="button_style"]
+texture = ExtResource("3_style")
+
+[sub_resource type="StyleBoxTexture" id="hover_style"]
+texture = ExtResource("3_style")
+modulate_color = Color(0.92, 0.66, 0.54, 1)
+
 
 [node name="main_menu" type="Control" unique_id=986450603]
 layout_mode = 3
@@ -14,48 +23,58 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_fax0a")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1707888651]
-layout_mode = 1
+[node name="MenuMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_track")
+volume_db = -12.0
+bus = &"Music"
+
+[node name="MenuBackdrop" type="ColorRect" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 6.0
-offset_top = 3.0
-offset_right = 6.0
-offset_bottom = 3.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("CompressedTexture2D_ote24")
+mouse_filter = 2
+color = Color(0.052, 0.12, 0.40, 1)
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1707888651]
+layout_mode = 0
+mouse_filter = 2
+texture = ExtResource("2_bg")
 expand_mode = 1
-stretch_mode = 6
+stretch_mode = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1827872370]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -219.0
-offset_top = -220.5
-offset_right = 219.0
-offset_bottom = 220.5
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 0
+offset_right = 248.0
+offset_bottom = 274.0
+alignment = 1
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 38
+text = "Time Out"
+horizontal_alignment = 1
+
 
 [node name="Button" type="Button" parent="VBoxContainer" unique_id=974724845]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "Start"
+theme_override_styles/normal = SubResource("button_style")
+theme_override_styles/hover = SubResource("hover_style")
+text = "Play"
 
 [node name="Button2" type="Button" parent="VBoxContainer" unique_id=781807480]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("button_style")
+theme_override_styles/hover = SubResource("hover_style")
 text = "Settings"
 
 [node name="Button3" type="Button" parent="VBoxContainer" unique_id=105425404]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("button_style")
+theme_override_styles/hover = SubResource("hover_style")
 text = "Quit"
 
 [node name="SettingsPanel" type="Panel" parent="." unique_id=1087183707]
@@ -66,10 +85,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -571.0
-offset_top = -320.0
-offset_right = 582.0
-offset_bottom = 320.0
+offset_left = -270.0
+offset_top = -146.0
+offset_right = 270.0
+offset_bottom = 146.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -80,10 +99,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -576.5
-offset_top = -319.0
-offset_right = 570.5
-offset_bottom = 62.5
+offset_left = -220.0
+offset_top = -107.0
+offset_right = 220.0
+offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
 

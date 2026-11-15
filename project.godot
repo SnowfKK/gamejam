@@ -10,12 +10,19 @@ config_version=5
 
 [application]
 
-config/name="Game Jam"
-run/main_scene="uid://dcglq442sr2r5"
+config/name="Time Out"
+run/main_scene="res://sceans/main_menu.tscn"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameState="*res://scripts/GameState.gd"
+
 [display]
+
+window/size/window_width_override=1980
+window/size/window_height_override=1080
 
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
@@ -24,9 +31,24 @@ window/stretch/aspect="expand"
 
 enabled=PackedStringArray("res://addons/GodotTogether/plugin.cfg")
 
+[input]
+
+clock_interact={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"physical_keycode":69)]
+}
+clock_left={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"physical_keycode":65)]
+}
+clock_right={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"physical_keycode":68)]
+}
+
 [physics]
 
-3d/physics_engine="Jolt Physics"
+2d/physics_engine="GodotPhysics2D"
 
 [rendering]
 

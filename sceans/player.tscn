@@ -3,6 +3,10 @@
 [ext_resource type="Script" uid="uid://bogca0bf35g3k" path="res://scripts/player.gd" id="1_bx0fl"]
 [ext_resource type="Texture2D" uid="uid://dt6eip58j7ax8" path="res://assets/Sprite-0004-Sheet.png" id="1_nttm0"]
 
+[ext_resource type="AudioStream" path="res://addons/GodotTogether/src/scripts/extras/halloween/knock1.ogg" id="jump_sound"]
+[ext_resource type="AudioStream" path="res://addons/GodotTogether/src/scripts/extras/halloween/knock2.ogg" id="land_sound"]
+
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_nttm0"]
 atlas = ExtResource("1_nttm0")
 region = Rect2(0, 0, 32, 32)
@@ -75,7 +79,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sytet"]
-size = Vector2(5, 21)
+size = Vector2(24, 40)
 
 [node name="player" type="CharacterBody2D" unique_id=284845306 groups=["player"]]
 z_index = 5
@@ -88,5 +92,15 @@ sprite_frames = SubResource("SpriteFrames_l67ju")
 frame_progress = 0.2699234
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1637073879]
-position = Vector2(11.5, -11.5)
+position = Vector2(12, -12)
 shape = SubResource("RectangleShape2D_sytet")
+
+[node name="JumpSfx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("jump_sound")
+volume_db = -14.0
+bus = &"SFX"
+
+[node name="LandSfx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("land_sound")
+volume_db = -16.0
+bus = &"SFX"

@@ -1,91 +1,197 @@
 [gd_scene format=3 uid="uid://sm6ar1yk62du"]
 
-[ext_resource type="Texture2D" uid="uid://cjmf4q166lq2y" path="res://assets/concrete.png" id="1_beefx"]
-[ext_resource type="Texture2D" uid="uid://bms047fclkxyv" path="res://assets/tileswood.png" id="2_q0hni"]
-[ext_resource type="Texture2D" uid="uid://c242xjtjs6w55" path="res://assets/woodplatform.png" id="3_eecjm"]
-[ext_resource type="Texture2D" uid="uid://crwwqsbrxnttj" path="res://assets/tilesconcrete.png" id="4_mwwqk"]
-[ext_resource type="PackedScene" uid="uid://c2npswig4vo2a" path="res://sceans/platforms.tscn" id="5_1peb6"]
-[ext_resource type="Texture2D" uid="uid://71w0e2ohu7up" path="res://assets/background.png" id="5_q0hni"]
-[ext_resource type="PackedScene" uid="uid://cj8mhq26eoiuu" path="res://sceans/player.tscn" id="6_hu8gt"]
-[ext_resource type="PackedScene" uid="uid://b867s6fm1mae3" path="res://sceans/killzone.tscn" id="7_pq20c"]
-[ext_resource type="PackedScene" uid="uid://prnsy1npqo36" path="res://sceans/next_level.tscn" id="8_exit"]
+[ext_resource type="Script" path="res://sceans/level_1.gd" id="control"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p1alf"]
-texture = ExtResource("1_beefx")
-0:0/0 = 0
+[ext_resource type="Texture2D" path="res://assets/cloud.png" id="cloud"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tutu3"]
-texture = ExtResource("2_q0hni")
+[ext_resource type="Texture2D" path="res://assets/tileswood.png" id="wood"]
+
+[ext_resource type="PackedScene" path="res://sceans/sky_background.tscn" id="sky"]
+
+[ext_resource type="PackedScene" path="res://sceans/player.tscn" id="player"]
+
+[ext_resource type="PackedScene" path="res://sceans/next_level.tscn" id="exit"]
+
+[ext_resource type="PackedScene" path="res://sceans/platforms.tscn" id="lift"]
+
+[ext_resource type="PackedScene" path="res://sceans/killzone.tscn" id="kill"]
+
+[ext_resource type="PackedScene" path="res://sceans/bounce_pad.tscn" id="spring"]
+
+[ext_resource type="PackedScene" path="res://sceans/sun_hazard.tscn" id="beam"]
+
+[ext_resource type="PackedScene" path="res://sceans/crumble_cloud.tscn" id="crumble"]
+
+[ext_resource type="PackedScene" path="res://sceans/route_checkpoint.tscn" id="flag"]
+
+[sub_resource type="TileSetAtlasSource" id="CloudAtlas"]
+texture = ExtResource("cloud")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5vvnq"]
-texture = ExtResource("3_eecjm")
+[sub_resource type="TileSetAtlasSource" id="WoodAtlas"]
+texture = ExtResource("wood")
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_x0kff"]
-texture = ExtResource("4_mwwqk")
-0:0/0 = 0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eecjm"]
-texture = ExtResource("5_q0hni")
-0:0/size_in_atlas = Vector2i(120, 22)
-0:0/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_sytet"]
+[sub_resource type="TileSet" id="Tiles"]
 physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_p1alf")
-sources/1 = SubResource("TileSetAtlasSource_tutu3")
-sources/2 = SubResource("TileSetAtlasSource_5vvnq")
-sources/3 = SubResource("TileSetAtlasSource_x0kff")
-sources/4 = SubResource("TileSetAtlasSource_eecjm")
+sources/1 = SubResource("WoodAtlas")
+sources/5 = SubResource("CloudAtlas")
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_l67ju"]
-distance = -39.0
+[sub_resource type="WorldBoundaryShape2D" id="Pit"]
+distance = 0.0
 
-[node name="levelroot" type="Node2D" unique_id=205073746]
-metadata/_edit_horizontal_guides_ = [-295.0]
+[sub_resource type="RectangleShape2D" id="RelayDeck"]
+size = Vector2(144, 16)
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=2091636934]
-limit_left = -10000001
-limit_top = -9999999
-limit_right = 9999999
-limit_bottom = 101
-rotation_smoothing_enabled = true
-zoom = Vector2(3, 3)
+[sub_resource type="RectangleShape2D" id="Windgate"]
+size = Vector2(156, 16)
 
-[node name="Background" type="Sprite2D" parent="Camera2D"]
-z_index = -100
-z_as_relative = false
-scale = Vector2(1.4, 2.6)
-texture = ExtResource("5_q0hni")
+[node name="levelroot" type="Node2D"]
+script = ExtResource("control")
 
-[node name="TileMap" type="TileMap" parent="." unique_id=2002170553]
-position = Vector2(685, 23)
-tile_set = SubResource("TileSet_sytet")
+[node name="SkyBackground" parent="." instance=ExtResource("sky")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -80)
+zoom = Vector2(2, 2)
+limit_left = -1000
+limit_top = -1000
+limit_right = 1840
+limit_bottom = 100
+
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2(689, 13)
+tile_set = SubResource("Tiles")
 format = 2
-layer_0/tile_data = PackedInt32Array(65535, 1, 0, 0, 1, 0, 1, 1, 0, 65534, 1, 0, 65533, 1, 0, 2, 1, 0, -524287, 4, 0, -524272, 1, 0, -524271, 1, 0, -262126, 1, 0, -393199, 1, 0, -393200, 1, 0, -393197, 1, 0, -393196, 1, 0, -327660, 1, 0, -327659, 1, 0, -262122, 1, 0, -131056, 1, 268435456, -131055, 1, 268435456, -196590, 1, 0, -196589, 1, 0, -196591, 1, 0, -196592, 1, 0, -458732, 1, 268435456, -458731, 1, 268435456, -524267, 1, 268435456, -524266, 1, 268435456, -458730, 1, 268435456, -458729, 1, 268435456, -458728, 1, 268435456, -458727, 1, 268435456, -393190, 1, 268435456, -393189, 1, 268435456, -393188, 1, 268435456, -327652, 1, 268435456, -262116, 1, 268435456, -196580, 1, 268435456, -131044, 1, 268435456, -327651, 1, 268435456, -262115, 1, 268435456, -196579, 1, 268435456, -131043, 1, 268435456, -327650, 1, 268435456, -262114, 1, 268435456, -196578, 1, 268435456, -131042, 1, 268435456, -196588, 1, 0, -196587, 1, 0, -393198, 1, 0, -458734, 1, 0, -327658, 1, 0, -393195, 1, 0, -393194, 1, 0, -393193, 1, 0, -393192, 1, 0, -327655, 1, 0, -458733, 1, 0, -65519, 1, 0, -131052, 1, 0, -131051, 1, 0, -131050, 1, 0, -196586, 1, 0, -196585, 1, 0, -131049, 1, 0, -65514, 1, 0, -327662, 1, 0, -458735, 1, 0, -589808, 1, 0, -655344, 1, 0)
-layer_1/name = "Layer1"
-layer_1/z_index = 1
-layer_1/tile_data = PackedInt32Array(-458750, 0, 0, -393214, 0, 0, -42, 3, 0, -41, 3, 0, -40, 3, 0, -65574, 3, 0, -131108, 3, 0, -196642, 3, 0, -262176, 3, 0, -262174, 3, 0, -262172, 3, 0, -131099, 3, 0, -26, 3, 0, 131048, 3, 0, 131051, 3, 0, 131054, 3, 0, -131090, 3, 0, -65554, 3, 0, -18, 3, 0, 65518, 3, 0, 65516, 3, 0, -196624, 3, 0, -196623, 3, 0, -262157, 3, 0, -393226, 3, 0, -262150, 3, 0, -393223, 3, 0, -65541, 3, 0)
+layer_0/tile_data = PackedInt32Array(-262187, 5, 0, -262186, 5, 0, -327719, 5, 1610612736, -327718, 5, 1610612736, -327717, 5, 1610612736, -327716, 5, 1610612736, -327715, 5, 1610612736, -327714, 5, 1610612736, -393254, 5, 1610612736, -393253, 5, 1610612736, -393252, 5, 1610612736, -393251, 5, 1610612736, -458789, 5, 1610612736, -458788, 5, 1610612736, -589856, 5, 1610612736, -589855, 5, 1610612736, -589854, 5, 1610612736, -589853, 5, 1610612736, -589852, 5, 1610612736, -589851, 5, 1610612736, -655391, 5, 1610612736, -655390, 5, 1610612736, -655389, 5, 1610612736, -655388, 5, 1610612736, -720926, 5, 1610612736, -720925, 5, 1610612736, -720918, 5, 1610612736, -720917, 5, 1610612736, -720916, 5, 1610612736, -720915, 5, 1610612736, -720914, 5, 1610612736, -720913, 5, 1610612736, -786452, 5, 1610612736, -786451, 5, 1610612736, -786450, 5, 1610612736, 65533, 1, 0, 65534, 1, 0, 65535, 1, 0, 0, 1, 0, 1, 1, 0, 2, 1, 0, 13, 1, 0, 14, 1, 0, 15, 1, 0, 16, 1, 0, 17, 1, 0, 18, 1, 0)
 
-[node name="platforms" parent="." unique_id=483372837 instance=ExtResource("5_1peb6")]
-z_index = 5
+[node name="CrumbleWest" parent="." instance=ExtResource("crumble")]
+position = Vector2(462, -163)
+
+[node name="CrumbleMiddle" parent="." instance=ExtResource("crumble")]
+position = Vector2(529, -111)
+hold_time = 0.40
+
+[node name="CrumbleEast" parent="." instance=ExtResource("crumble")]
+position = Vector2(596, -57)
+hold_time = 0.34
+
+[node name="CloudWarning" type="Label" parent="."]
+offset_left = 293.0
+offset_top = -237.0
+offset_right = 443.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_shadow_color = Color(0.08, 0.1, 0.17, 1)
+theme_override_constants/shadow_offset_y = 1
+text = "Clouds crumble. Keep moving!"
+horizontal_alignment = 1
+
+[node name="platforms" parent="." instance=ExtResource("lift")]
 position = Vector2(837, 31)
+z_index = 5
 scale = Vector2(2.6, 1)
 move_distance = 40.0
 duration = 2.2
 
-[node name="player" parent="." unique_id=284845306 instance=ExtResource("6_hu8gt")]
-position = Vector2(660, 0)
+[node name="killzone" parent="." instance=ExtResource("kill")]
+position = Vector2(14, 76)
 
-[node name="killzone" parent="." unique_id=1677886087 instance=ExtResource("7_pq20c")]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="killzone"]
+position = Vector2(-1, -39)
+shape = SubResource("Pit")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="killzone" unique_id=283276266]
-position = Vector2(0, 18)
-shape = SubResource("WorldBoundaryShape2D_l67ju")
+[node name="ReturnSpring" parent="." instance=ExtResource("spring")]
+position = Vector2(944, 13)
+bounce_velocity = Vector2(0, -650)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=968022606]
+[node name="ReturnCheckpoint" type="Marker2D" parent="."]
+position = Vector2(889, -25)
 
-[node name="exit" parent="." instance=ExtResource("8_exit")]
-position = Vector2(1185, -72)
+[node name="SpringHint" type="Label" parent="."]
+offset_left = 863.0
+offset_top = 28.0
+offset_right = 1025.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_shadow_color = Color(0.08, 0.1, 0.17, 1)
+theme_override_constants/shadow_offset_y = 1
+text = "Spring up to the exit"
+horizontal_alignment = 1
+
+[node name="RelayDeck" type="StaticBody2D" parent="."]
+position = Vector2(1050, -129)
+
+[node name="Cloud" type="Sprite2D" parent="RelayDeck"]
+scale = Vector2(9, 1.3)
+texture = ExtResource("cloud")
+
+[node name="Lip" type="Line2D" parent="RelayDeck"]
+points = PackedVector2Array(-72, -8, 72, -8)
+width = 2.0
+default_color = Color(0.69, 0.91, 1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RelayDeck"]
+shape = SubResource("RelayDeck")
+
+[node name="DriftCloud" parent="." instance=ExtResource("crumble")]
+position = Vector2(1162, -126)
+hold_time = 0.37
+
+[node name="DraftLift" parent="." instance=ExtResource("lift")]
+position = Vector2(1261, -113)
+scale = Vector2(1.65, 1)
+move_distance = 84.0
+duration = 1.38
+
+[node name="Crosswind" parent="." instance=ExtResource("beam")]
+position = Vector2(1306, -181)
+beam_size = Vector2(14, 165)
+safe_time = 4
+warning_time = 0.8
+danger_time = 1
+damage_interval = 0.14
+phase_offset = 0
+
+[node name="Windgate" type="StaticBody2D" parent="."]
+position = Vector2(1425, -168)
+
+[node name="Cloud" type="Sprite2D" parent="Windgate"]
+scale = Vector2(9.75, 1.3)
+texture = ExtResource("cloud")
+
+[node name="Lip" type="Line2D" parent="Windgate"]
+points = PackedVector2Array(-78, -8, 78, -8)
+width = 2.0
+default_color = Color(0.69, 0.91, 1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Windgate"]
+shape = SubResource("Windgate")
+one_way_collision = true
+
+[node name="RouteCheckpoint" parent="." instance=ExtResource("flag")]
+position = Vector2(1050, -156)
+
+[node name="exit" parent="." instance=ExtResource("exit")]
+position = Vector2(1441, -194)
+
+[node name="SpawnPoint" type="Marker2D" parent="."]
+position = Vector2(9, -74)
+
+[node name="player" parent="." instance=ExtResource("player")]
+position = Vector2(9, -74)
+
+[node name="SunHazard1" parent="." instance=ExtResource("beam")]
+position = Vector2(-48, -252)
+rotation = -1.2046362
+scale = Vector2(0.3612395, 17.118078)
+
+[node name="SunHazard2" parent="." instance=ExtResource("beam")]
+position = Vector2(-108, -237)
+rotation = -1.196977
+scale = Vector2(-0.255963, -110.887955)
+warning_time = 2.0
+danger_time = 4.0
+damage_interval = 2.0
+
+[connection signal="launched" from="ReturnSpring" to="." method="_on_return_spring_launched"]

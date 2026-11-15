@@ -1,18 +1,26 @@
+# Wykrywa upadek i odracza obrażenia na czas dźwięku.
 extends Area2D
 
+var _falling_player: CharacterBody2D
+
 @onready var timer: Timer = $Timer
+@onready var sfx: AudioStreamPlayer2D = $DeathSfx
 
 
+# Zatrzymuje gracza i odlicza od początku dla każdego nowego upadku.
 func _on_body_entered(body: Node2D) -> void:
-	if not body.is_in_group("player") or not timer.is_stopped():
+	var player := body as CharacterBody2D
+	if player == null or not player.is_in_group("player") or not player.is_physics_processing():
 		return
-	body.set_physics_process(false)
+	_falling_player = player
+	player.set_physics_process(false)
+	sfx.play()
 	timer.start()
 
 
+# Pomija karę, jeśli inne obrażenia już przeniosły gracza i wznowiły ruch.
 func _on_timer_timeout() -> void:
-	var main := get_tree().current_scene
-	if main and main.has_method("reload_level"):
-		main.reload_level()
-	else:
-		get_tree().reload_current_scene()
+	var player := _falling_player
+	_falling_player = null
+	if is_instance_valid(player) and player.is_inside_tree() and not player.is_physics_processing():
+		GameState.take_damage()
