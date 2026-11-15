@@ -18,6 +18,9 @@
 
 [ext_resource type="PackedScene" path="res://sceans/sun_hazard.tscn" id="beam"]
 
+[ext_resource type="Script" path="res://scripts/level_music.gd" id="level_music_script"]
+[ext_resource type="AudioStream" path="res://assets/hyde-60s-and-70s-rock-instrumental.mp3" id="level_track"]
+
 [sub_resource type="RectangleShape2D" id="Base"]
 size = Vector2(207, 16)
 
@@ -54,6 +57,13 @@ size = Vector2(68, 16)
 
 [node name="Switchback" type="Node2D"]
 script = ExtResource("control")
+
+[node name="LevelMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("level_track")
+volume_db = -15.0
+bus = &"Music"
+script = ExtResource("level_music_script")
+
 
 [node name="SkyBackground" parent="." instance=ExtResource("sky")]
 
@@ -217,7 +227,7 @@ starts_powered = false
 
 [node name="Direction" type="Label" parent="."]
 position = Vector2(182, -186)
-text = "←"
+text = "Left"
 theme_override_font_sizes/font_size = 18
 z_index = 3
 

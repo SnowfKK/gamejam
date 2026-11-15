@@ -3,7 +3,7 @@ extends Node
 
 # Globalny stan gry: zdrowie gracza i HUD z serduszkami
 const MAX_HEALTH := 4
-const HEART_TEX_PATH := "res://assets/life.png"
+const HEART_TEXTURE := preload("res://assets/life.png")
 
 var current_health := MAX_HEALTH
 var _hearts: Array[TextureRect] = []
@@ -77,7 +77,7 @@ func _build_hud() -> void:
 	var hbox := HBoxContainer.new()
 	margin.add_child(hbox)
 
-	var heart_tex := load(HEART_TEX_PATH) as Texture2D
+	var heart_tex := HEART_TEXTURE
 	for i in MAX_HEALTH:
 		var heart := TextureRect.new()
 		heart.texture = heart_tex

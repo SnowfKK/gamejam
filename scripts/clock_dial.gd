@@ -52,7 +52,7 @@ func _physics_process(delta: float) -> void:
 		label.text = "E / Enter · Confirm"
 		label.modulate = Color("#c4ffa2")
 	else:
-		label.text = "A/D or ←/→ · Set the hand to VI"
+		label.text = "A/D or Left/Right · Set to VI"
 		label.modulate = Color.WHITE
 
 

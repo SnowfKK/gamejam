@@ -13,6 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://c2npswig4vo2a" path="res://sceans/platforms.tscn" id="route_lift"]
 [ext_resource type="PackedScene" path="res://sceans/sky_background.tscn" id="screen_sky"]
 [ext_resource type="PackedScene" uid="uid://6a47a4423" path="res://sceans/bounce_pad.tscn" id="spring"]
+[ext_resource type="Script" path="res://scripts/level_music.gd" id="level_music_script"]
+[ext_resource type="AudioStream" path="res://assets/hyde-indie-rock-arctic-monkeys-styled-instrumental.mp3" id="level_track"]
+
 [sub_resource type="RectangleShape2D" id="Arrival"]
 size = Vector2(188, 16)
 
@@ -57,6 +60,13 @@ size = Vector2(161, 16)
 
 [node name="level3" type="Node2D" unique_id=2006816601]
 script = ExtResource("puzzle")
+
+[node name="LevelMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("level_track")
+volume_db = -15.0
+bus = &"Music"
+script = ExtResource("level_music_script")
+
 
 [node name="Cables" type="Node2D" parent="." unique_id=503983893]
 

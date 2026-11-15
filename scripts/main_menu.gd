@@ -22,16 +22,19 @@ func _ready() -> void:
 	_layout_menu()
 
 
-# Ustawia grafikę i przyciski z odstępem od krawędzi okna.
+# Dopasowuje obraz do okna i umieszcza przyciski w jego prawej części.
 func _layout_menu() -> void:
-	var safe_margin := 56.0
-	if size.x < size.y * 1.28:
-		artwork.size = Vector2(size.x, size.y * 0.54)
-		main_buttons.position = Vector2(size.x * 0.5, (size.y + artwork.size.y) * 0.5) - main_buttons.size * 0.5
-	else:
-		artwork.size = Vector2(size.x * 0.62, size.y)
-		main_buttons.position = Vector2((size.x + artwork.size.x) * 0.5, size.y * 0.5) - main_buttons.size * 0.5
-	main_buttons.position.x = clampf(main_buttons.position.x, safe_margin, maxf(safe_margin, size.x - main_buttons.size.x - safe_margin))
+	var artwork_size := artwork.texture.get_size()
+	var scale_factor := minf(size.x / artwork_size.x, size.y / artwork_size.y)
+	artwork.size = artwork_size * scale_factor
+	artwork.position = (size - artwork.size) * 0.5
+
+	main_buttons.size = Vector2(186.0, main_buttons.get_combined_minimum_size().y)
+	var inset := artwork.size.x * 0.035
+	main_buttons.position = artwork.position + Vector2(
+		artwork.size.x - main_buttons.size.x - inset,
+		(artwork.size.y - main_buttons.size.y) * 0.5
+	)
 
 
 # Rozpoczyna kampanię od pierwszego poziomu.

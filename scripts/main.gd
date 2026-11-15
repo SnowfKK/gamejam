@@ -10,12 +10,13 @@ const LEVELS: Array[String] = [
 ]
 const LEVEL_NAMES := ["Crumbling Skyway", "Relay Foundry", "Clockwork Crossing", "Switchback Engine", "The Clockkeeper"]
 const CONTROLS_DURATION := 15.0
+const END_DURATION := 30.0
 const WIN_SCENE := "res://sceans/main_menu.tscn"
 
 var level_index := 0
 var current_level: Node2D
 var level_label: Label
-var win_label: Label
+var win_art: TextureRect
 var _changing := false
 var _won := false
 var controls: PanelContainer
@@ -37,14 +38,14 @@ func _ready() -> void:
 	var win_layer := CanvasLayer.new()
 	win_layer.layer = 10
 	add_child(win_layer)
-	win_label = Label.new()
-	win_label.text = "The skyway is back!\n\nEnter · Return to menu"
-	win_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	win_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	win_label.set_anchors_preset(Control.PRESET_FULL_RECT)
-	win_label.add_theme_font_size_override("font_size", 48)
-	win_label.hide()
-	win_layer.add_child(win_label)
+	win_art = TextureRect.new()
+	win_art.texture = preload("res://assets/end.png")
+	win_art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	win_art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	win_art.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	win_layer.add_child(win_art)
+	win_art.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	win_art.hide()
 
 	transition_sfx = AudioStreamPlayer.new()
 	transition_sfx.bus = &"SFX"
@@ -64,7 +65,7 @@ func _build_controls(layer: CanvasLayer) -> void:
 	controls.offset_top = -198.0
 	controls.offset_bottom = -53.0
 	var label := Label.new()
-	label.text = "HOW TO PLAY\n← / →  Move      ↑  Jump twice\nE / Enter  Repair & confirm      A/D  Turn the dial\nEsc  Main menu      F1  Controls      F11  Fullscreen"
+	label.text = "HOW TO PLAY\nLeft / Right  Move      Up  Jump twice\nE / Enter  Repair & confirm      A/D  Turn the dial\nEsc  Main menu      F1  Controls      F11  Fullscreen"
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	label.add_theme_font_size_override("font_size", 20)
@@ -124,16 +125,20 @@ func _show_win() -> void:
 	_controls_timer.stop()
 	controls.hide()
 	add_child(preload("res://sceans/sky_background.tscn").instantiate())
-	win_label.show()
+	win_art.show()
+	get_tree().create_timer(END_DURATION).timeout.connect(_return_to_menu)
 
 
-# Przełącza przewodnik klawiszem F1, a po wygranej obsługuje powrót do menu.
+# Wraca do menu po 30 sekundach od wyświetlenia obrazu końcowego.
+func _return_to_menu() -> void:
+	get_tree().change_scene_to_file(WIN_SCENE)
+
+
+# Przełącza przewodnik klawiszem F1 podczas rozgrywki.
 func _unhandled_input(event: InputEvent) -> void:
 	if not _won and event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_F1:
 		controls.visible = not controls.visible
 		_controls_timer.stop()
-	elif _won and event.is_action_pressed("ui_accept"):
-		get_tree().change_scene_to_file(WIN_SCENE)
 
 
 # Prowadzi kamerę za graczem, z wyjątkiem kamery areny bossa.

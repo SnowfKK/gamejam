@@ -24,6 +24,9 @@
 
 [ext_resource type="PackedScene" path="res://sceans/route_checkpoint.tscn" id="flag"]
 
+[ext_resource type="Script" path="res://scripts/level_music.gd" id="level_music_script"]
+[ext_resource type="AudioStream" path="res://assets/arthur-vyncke-cherry-metal.mp3" id="level_track"]
+
 [sub_resource type="TileSetAtlasSource" id="CloudAtlas"]
 texture = ExtResource("cloud")
 0:0/0 = 0
@@ -50,6 +53,13 @@ size = Vector2(156, 16)
 
 [node name="levelroot" type="Node2D"]
 script = ExtResource("control")
+
+[node name="LevelMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("level_track")
+volume_db = -15.0
+bus = &"Music"
+script = ExtResource("level_music_script")
+
 
 [node name="SkyBackground" parent="." instance=ExtResource("sky")]
 
