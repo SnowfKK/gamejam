@@ -5,8 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://c242xjtjs6w55" path="res://assets/woodplatform.png" id="3_eecjm"]
 [ext_resource type="Texture2D" uid="uid://crwwqsbrxnttj" path="res://assets/tilesconcrete.png" id="4_mwwqk"]
 [ext_resource type="PackedScene" uid="uid://c2npswig4vo2a" path="res://sceans/platforms.tscn" id="5_1peb6"]
+[ext_resource type="Texture2D" uid="uid://71w0e2ohu7up" path="res://assets/background.png" id="5_q0hni"]
 [ext_resource type="PackedScene" uid="uid://cj8mhq26eoiuu" path="res://sceans/player.tscn" id="6_hu8gt"]
 [ext_resource type="PackedScene" uid="uid://b867s6fm1mae3" path="res://sceans/killzone.tscn" id="7_pq20c"]
+[ext_resource type="PackedScene" uid="uid://prnsy1npqo36" path="res://sceans/next_level.tscn" id="8_exit"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p1alf"]
 texture = ExtResource("1_beefx")
@@ -25,17 +27,24 @@ texture = ExtResource("3_eecjm")
 texture = ExtResource("4_mwwqk")
 0:0/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eecjm"]
+texture = ExtResource("5_q0hni")
+0:0/size_in_atlas = Vector2i(120, 22)
+0:0/0 = 0
+
 [sub_resource type="TileSet" id="TileSet_sytet"]
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_p1alf")
 sources/1 = SubResource("TileSetAtlasSource_tutu3")
 sources/2 = SubResource("TileSetAtlasSource_5vvnq")
 sources/3 = SubResource("TileSetAtlasSource_x0kff")
+sources/4 = SubResource("TileSetAtlasSource_eecjm")
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_l67ju"]
 distance = -39.0
 
 [node name="levelroot" type="Node2D" unique_id=205073746]
+metadata/_edit_horizontal_guides_ = [-295.0]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2091636934]
 limit_left = -10000001
@@ -43,17 +52,32 @@ limit_top = -9999999
 limit_right = 9999999
 limit_bottom = 101
 rotation_smoothing_enabled = true
+zoom = Vector2(3, 3)
+
+[node name="Background" type="Sprite2D" parent="Camera2D"]
+z_index = -100
+z_as_relative = false
+scale = Vector2(1.4, 2.6)
+texture = ExtResource("5_q0hni")
 
 [node name="TileMap" type="TileMap" parent="." unique_id=2002170553]
+position = Vector2(685, 23)
 tile_set = SubResource("TileSet_sytet")
 format = 2
-layer_0/tile_data = PackedInt32Array(65534, 1, 0, 65535, 1, 0)
+layer_0/tile_data = PackedInt32Array(65535, 1, 0, 0, 1, 0, 1, 1, 0, 65534, 1, 0, 65533, 1, 0, 2, 1, 0, -524287, 4, 0, -524272, 1, 0, -524271, 1, 0, -262126, 1, 0, -393199, 1, 0, -393200, 1, 0, -393197, 1, 0, -393196, 1, 0, -327660, 1, 0, -327659, 1, 0, -262122, 1, 0, -131056, 1, 268435456, -131055, 1, 268435456, -196590, 1, 0, -196589, 1, 0, -196591, 1, 0, -196592, 1, 0, -458732, 1, 268435456, -458731, 1, 268435456, -524267, 1, 268435456, -524266, 1, 268435456, -458730, 1, 268435456, -458729, 1, 268435456, -458728, 1, 268435456, -458727, 1, 268435456, -393190, 1, 268435456, -393189, 1, 268435456, -393188, 1, 268435456, -327652, 1, 268435456, -262116, 1, 268435456, -196580, 1, 268435456, -131044, 1, 268435456, -327651, 1, 268435456, -262115, 1, 268435456, -196579, 1, 268435456, -131043, 1, 268435456, -327650, 1, 268435456, -262114, 1, 268435456, -196578, 1, 268435456, -131042, 1, 268435456, -196588, 1, 0, -196587, 1, 0, -393198, 1, 0, -458734, 1, 0, -327658, 1, 0, -393195, 1, 0, -393194, 1, 0, -393193, 1, 0, -393192, 1, 0, -327655, 1, 0, -458733, 1, 0, -65519, 1, 0, -131052, 1, 0, -131051, 1, 0, -131050, 1, 0, -196586, 1, 0, -196585, 1, 0, -131049, 1, 0, -65514, 1, 0, -327662, 1, 0, -458735, 1, 0, -589808, 1, 0, -655344, 1, 0)
+layer_1/name = "Layer1"
+layer_1/z_index = 1
+layer_1/tile_data = PackedInt32Array(-458750, 0, 0, -393214, 0, 0, -42, 3, 0, -41, 3, 0, -40, 3, 0, -65574, 3, 0, -131108, 3, 0, -196642, 3, 0, -262176, 3, 0, -262174, 3, 0, -262172, 3, 0, -131099, 3, 0, -26, 3, 0, 131048, 3, 0, 131051, 3, 0, 131054, 3, 0, -131090, 3, 0, -65554, 3, 0, -18, 3, 0, 65518, 3, 0, 65516, 3, 0, -196624, 3, 0, -196623, 3, 0, -262157, 3, 0, -393226, 3, 0, -262150, 3, 0, -393223, 3, 0, -65541, 3, 0)
 
 [node name="platforms" parent="." unique_id=483372837 instance=ExtResource("5_1peb6")]
-position = Vector2(-2, 0)
+z_index = 5
+position = Vector2(837, 31)
+scale = Vector2(2.6, 1)
+move_distance = 40.0
+duration = 2.2
 
 [node name="player" parent="." unique_id=284845306 instance=ExtResource("6_hu8gt")]
-position = Vector2(-11, 0)
+position = Vector2(660, 0)
 
 [node name="killzone" parent="." unique_id=1677886087 instance=ExtResource("7_pq20c")]
 
@@ -63,8 +87,5 @@ shape = SubResource("WorldBoundaryShape2D_l67ju")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=968022606]
 
-[node name="exit" type="Area2D" parent="." unique_id=1527537428]
-position = Vector2(35, 7)
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="exit" unique_id=205445581]
+[node name="exit" parent="." instance=ExtResource("8_exit")]
+position = Vector2(1185, -72)
